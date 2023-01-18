@@ -20,9 +20,6 @@ const RoundSummary = ({ distanceBetween, setView, setCurrentRound, dataLength, c
             <h1>Runda zakończona!</h1>
             <SummaryWrapper>
                 <SummaryItem distanceBetween={distanceBetween} />
-                <SummaryItem distanceBetween={distanceBetween} />
-                <SummaryItem distanceBetween={distanceBetween} />
-                <SummaryItem distanceBetween={distanceBetween} />
             </SummaryWrapper>
             <Button onClick={handleNextRound}>Kontynuuj</Button>
         </Wrapper>
