@@ -1,0 +1,91 @@
+import styled from 'styled-components';
+
+export const Wrapper = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+    }
+`;
+
+export const ImageWrapper = styled.div`
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+`;
+
+export const Img = styled.img`
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border: 2px solid #000000;
+    border-radius: 7px;
+    max-height: calc(100vh - 60px - 4rem);
+    @media screen and (max-width: 1366px) {
+        max-height: calc(100vh - 60px - 4rem);
+    }
+`;
+
+export const RightContainer = styled.div`
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    @media screen and (max-width: 768px) {
+        flex-direction: column-reverse;
+    }
+`;
+
+export const Ranking = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 7px;
+    gap: 10px;
+    min-width: 340px;
+    background-color: #ffffff;
+    padding: 5px;
+    @media screen and (max-width: 1366px) {
+        gap: 6px;
+    }
+`;
+
+export const RankingItem = styled.div`
+    padding: 10px 22px 10px 14px;
+    background-color: #f4f4f4;
+    border-radius: 7px;
+    display: flex;
+    position: relative;
+    font-size: 1.3rem;
+    @media screen and (max-width: 1366px) {
+        font-size: 1.1rem;
+        padding: 5px 22px 5px 14px;
+    }
+
+    span {
+        width: 24px;
+        text-align: center;
+        margin-left: auto;
+    }
+
+    &&::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+        right: 66px;
+        width: 1px;
+        height: 60%;
+        background-color: black;
+        border-radius: 100vw;
+    }
+`;
+
+export const RankingMyItem = styled(RankingItem)`
+    p {
+        color: green;
+    }
+`;
