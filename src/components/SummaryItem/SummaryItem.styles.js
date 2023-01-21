@@ -37,8 +37,8 @@ export const RangeWrapper = styled.div`
         /* width: 300px; */
         flex: 1;
     }
-    @media (max-width: 575) {
-        width: 100px;
+    @media (max-width: 768px) {
+        width: 150px;
     }
 `;
 

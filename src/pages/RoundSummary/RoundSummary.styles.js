@@ -8,6 +8,9 @@ export const Wrapper = styled.div`
     align-items: center;
     padding-bottom: 10%;
     gap: 3rem;
+    @media (max-width: 768px) {
+        padding-bottom: 0%;
+    }
 `;
 
 export const SummaryWrapper = styled.div`
