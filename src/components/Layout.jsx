@@ -20,11 +20,11 @@ const Content = styled.div`
     margin-top: 60px;
     padding: 2rem 4rem;
     display: flex;
-    @media screen and (max-width: 1366px) {
+    @media (max-width: 1366px) {
         padding: 2rem 2rem;
     }
-    @media screen and (max-width: 768px) {
-        padding: 2rem 1rem;
+    @media (max-width: 768px) {
+        padding: 2rem 0.5rem;
     }
 `;
 

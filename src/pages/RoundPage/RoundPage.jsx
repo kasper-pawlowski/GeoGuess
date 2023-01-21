@@ -3,9 +3,10 @@ import { ImageWrapper, Img, Ranking, RankingItem, RankingMyItem, RightContainer,
 import Map from '../../components/Map/Map';
 import { useGameCtx } from '../../contexts/GameContext';
 import Timer from '../../components/Timer/Timer';
+import { Navigate } from 'react-router-dom';
 
-const RoundPage = ({ user, data, setDistanceBetween, currentRound, setView }) => {
-    const { rounds, roundTime, selectedRegion } = useGameCtx();
+const RoundPage = ({ user, data, distanceBetween, setDistanceBetween, currentRound, setView, setPoints, points, setPointsHistory }) => {
+    const { roundTime, selectedRegion } = useGameCtx();
     const [loading, isLoading] = useState(true);
 
     useEffect(() => {
@@ -15,14 +16,21 @@ const RoundPage = ({ user, data, setDistanceBetween, currentRound, setView }) =>
     }, [data]);
 
     const handleNextRound = () => {
-        setView('summary');
+        if (distanceBetween >= 5000) {
+            setPoints((points) => points - 5000);
+        } else {
+            setPoints((points) => points + (5000 - distanceBetween));
+        }
+        setPointsHistory((prevPoints) => [...prevPoints, points]);
+        setView('roundSummary');
     };
 
     const handleTimeIsUp = () => {
-        setView('summary');
+        setView('roundSummary');
         setDistanceBetween(0);
     };
 
+    if (!selectedRegion) return <Navigate to="/" />;
     if (loading) return <Wrapper>Loading...</Wrapper>;
 
     return (
@@ -35,7 +43,7 @@ const RoundPage = ({ user, data, setDistanceBetween, currentRound, setView }) =>
                     <Ranking>
                         <RankingMyItem>
                             <p>{user.displayName}</p>
-                            <span>18</span>
+                            <span>{points}</span>
                         </RankingMyItem>
                         <RankingItem>
                             <p>Maciej</p>

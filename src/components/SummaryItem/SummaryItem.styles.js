@@ -7,41 +7,38 @@ export const Wrapper = styled.div`
     background-color: #f4f4f4;
     border-radius: 7px;
     font-size: 1.1rem;
+    @media (max-width: 768px) {
+        font-size: 0.8rem;
+        gap: 15px;
+    }
 `;
 
 export const Name = styled.div`
-    min-width: 180px;
+    /* width: 180px;
+    @media (max-width: 768px) {
+        min-width: auto;
+    } */
+`;
+
+export const Spacer = styled.div`
+    width: 1px;
+    height: 100%;
+    background-color: black;
 `;
 
 export const RangeWrapper = styled.div`
-    min-width: 400px;
     position: relative;
     display: flex;
     align-items: center;
     gap: 30px;
+    width: 400px;
 
-    &::before {
-        content: '';
-        position: absolute;
-        height: 80%;
-        width: 1px;
-        background-color: black;
-        top: 50%;
-        translate: 0 -50%;
-        left: -15px;
-        border-radius: 100vw;
+    @media (max-width: 910px) {
+        /* width: 300px; */
+        flex: 1;
     }
-
-    &::after {
-        content: '';
-        position: absolute;
-        height: 80%;
-        width: 1px;
-        background-color: black;
-        top: 50%;
-        translate: 0 -50%;
-        right: -15px;
-        border-radius: 100vw;
+    @media (max-width: 575) {
+        width: 100px;
     }
 `;
 
@@ -54,7 +51,8 @@ export const RangeTrack = styled.div`
         content: '';
         position: absolute;
         height: 10px;
-        width: 60%;
+        width: ${({ distanceBetween }) => 100 - (distanceBetween / 5000) * 100}%;
+
         background-color: ${({ theme }) => theme.colors.accent};
         top: 50%;
         translate: 0 -50%;
@@ -63,4 +61,8 @@ export const RangeTrack = styled.div`
     }
 `;
 
-export const Points = styled.div``;
+export const GameRangeTrack = styled(RangeTrack)`
+    &::after {
+        width: ${({ points, rounds }) => (points / (rounds * 5000)) * 100}%;
+    }
+`;

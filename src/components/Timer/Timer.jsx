@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Wrapper } from './Timer.styles';
-import { BiTime } from 'react-icons/bi';
+import { StyledIcon, StyledSpan, Wrapper } from './Timer.styles';
 
 const Timer = ({ time, handleTimeIsUp }) => {
     const [secondsLeft, setSecondsLeft] = useState(time);
@@ -22,8 +21,8 @@ const Timer = ({ time, handleTimeIsUp }) => {
 
     return (
         <Wrapper>
-            <BiTime />
-            <span>Pozostało {secondsLeft} sekund</span>
+            <StyledIcon {...(secondsLeft <= 10 && { warning: 'true' })} />
+            <StyledSpan {...(secondsLeft <= 10 && { warning: 'true' })}>Pozostało {secondsLeft} sekund</StyledSpan>
         </Wrapper>
     );
 };

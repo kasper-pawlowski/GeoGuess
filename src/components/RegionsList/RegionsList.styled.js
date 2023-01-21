@@ -4,8 +4,8 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    @media screen and (max-width: 768px) {
-        width: 70%;
+    @media (max-width: 768px) {
+        width: 80%;
         gap: 5px;
     }
 `;

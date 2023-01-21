@@ -6,10 +6,13 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding-bottom: 10%;
-    @media screen and (max-width: 768px) {
+    @media (max-width: 1366px) {
+        padding-bottom: 0;
+    }
+    @media (max-width: 768px) {
         flex-direction: column;
         gap: 40px;
-        padding-bottom: 0;
+        padding-bottom: 8rem;
     }
 `;
 
@@ -26,7 +29,7 @@ export const Container = styled.div`
         text-align: center;
     }
 
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
         gap: 10px;
     }
 `;
@@ -35,7 +38,7 @@ export const Line = styled.div`
     height: 40%;
     width: 2px;
     background-color: #d8d8d8;
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
         width: 50%;
         height: 2px;
     }
@@ -56,8 +59,8 @@ export const SettingWrapper = styled.div`
         font-size: 20px;
     }
 
-    @media screen and (max-width: 768px) {
-        min-width: 70%;
+    @media (max-width: 768px) {
+        min-width: 80%;
         padding: 6px;
     }
 `;
@@ -93,7 +96,7 @@ export const Button = styled.button`
         background-color: ${({ theme }) => theme.colors.accentShade};
     }
 
-    @media screen and (max-width: 768px) {
-        width: 70%;
+    @media (max-width: 768px) {
+        width: 80%;
     }
 `;

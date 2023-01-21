@@ -10,15 +10,6 @@ export const Wrapper = styled.div`
     gap: 3rem;
 `;
 
-export const SummaryWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    @media (max-width: 768px) {
-        width: 100%;
-    }
-`;
-
 export const Button = styled.button`
     display: flex;
     justify-content: center;
@@ -41,5 +32,14 @@ export const Button = styled.button`
 
     @media (max-width: 768px) {
         width: 70%;
+    }
+`;
+
+export const SummaryWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    @media (max-width: 768px) {
+        width: 100%;
     }
 `;

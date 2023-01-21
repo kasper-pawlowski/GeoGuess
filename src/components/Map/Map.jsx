@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Wrapper } from './Map.styled';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import { calculateDistance } from '../../helpers/calculateDistance';
 import { getApproximateCoords } from '../../helpers/getApproximateCoords';
 
@@ -40,7 +40,7 @@ const Map = ({ coordinates, setDistanceBetween, handleNextRound }) => {
                     zoomControl={false}
                     doubleClickZoom={false}
                     center={getApproximateCoords(targetPosition[0], targetPosition[1])}
-                    zoom={13}
+                    zoom={12}
                     scrollWheelZoom={false}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

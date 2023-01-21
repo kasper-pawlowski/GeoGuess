@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     gap: 20px;
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
         flex-direction: column;
     }
 `;
@@ -24,7 +24,7 @@ export const Img = styled.img`
     border: 2px solid #000000;
     border-radius: 7px;
     max-height: calc(100vh - 60px - 4rem);
-    @media screen and (max-width: 1366px) {
+    @media (max-width: 1366px) {
         max-height: calc(100vh - 60px - 4rem);
     }
 `;
@@ -33,8 +33,9 @@ export const RightContainer = styled.div`
     display: flex;
     height: 100%;
     flex-direction: column;
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
         flex-direction: column-reverse;
+        width: 100%;
     }
 `;
 
@@ -48,7 +49,7 @@ export const Ranking = styled.div`
     min-width: 340px;
     background-color: #ffffff;
     padding: 5px;
-    @media screen and (max-width: 1366px) {
+    @media (max-width: 1366px) {
         gap: 6px;
     }
 `;
@@ -60,18 +61,18 @@ export const RankingItem = styled.div`
     display: flex;
     position: relative;
     font-size: 1.3rem;
-    @media screen and (max-width: 1366px) {
+    @media (max-width: 1366px) {
         font-size: 1.1rem;
         padding: 5px 22px 5px 14px;
     }
 
     span {
-        width: 24px;
         text-align: center;
         margin-left: auto;
+        /* background-color: lightgrey; */
     }
 
-    &&::before {
+    /* &&::before {
         content: '';
         position: absolute;
         top: 50%;
@@ -81,7 +82,7 @@ export const RankingItem = styled.div`
         height: 60%;
         background-color: black;
         border-radius: 100vw;
-    }
+    } */
 `;
 
 export const RankingMyItem = styled(RankingItem)`

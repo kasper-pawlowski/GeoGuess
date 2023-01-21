@@ -13,10 +13,10 @@ export const Wrapper = styled.div`
     background: #ffffff;
     z-index: 999;
     padding: 0 4rem;
-    @media screen and (max-width: 1366px) {
+    @media (max-width: 1366px) {
         padding: 0 2rem;
     }
-    @media screen and (max-width: 768px) {
+    @media (max-width: 768px) {
         padding: 0 1rem;
     }
 `;

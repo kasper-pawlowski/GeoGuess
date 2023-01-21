@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     border-radius: 7px;
     min-width: 350px;
     min-height: 350px;
-    @media screen and (max-width: 1366px) {
+    @media (max-width: 1366px) {
         min-width: 280px;
         min-height: 280px;
     }

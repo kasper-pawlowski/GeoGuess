@@ -1,61 +1,50 @@
 import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import Error from '../../components/Error/Error.jsx';
 import RegionsList from '../../components/RegionsList/RegionsList.jsx';
 import { useGameCtx } from '../../contexts/GameContext.jsx';
+import useGameConditions from '../../hooks/useGameConditions.jsx';
 import { Button, Container, Input, Line, SettingWrapper, Wrapper } from './GameSetupPage.styles.js';
 
 const GameSetupPage = () => {
-    const [cookies, setCookie, removeCookie] = useCookies(['gameID']);
     const { rounds, setRounds, roundTime, setRoundTime, selectedRegion, setSelectedRegion } = useGameCtx();
-    const navigate = useNavigate();
-    const [error, setError] = useState(null);
+    const { errors, handleStartGame, regionError } = useGameConditions();
 
     useEffect(() => {
         setSelectedRegion('');
-        setRounds(4);
+        setRounds(5);
         setRoundTime(60);
     }, []);
-
-    const handleSetRounds = (e) => {
-        setRounds(e.target.value);
-    };
-
-    const handleSetRoundTime = (e) => {
-        setRoundTime(e.target.value);
-    };
-
-    useEffect(() => {
-        setCookie('gameID', crypto.randomUUID(), { path: '/' });
-    }, []);
-
-    const handleStart = () => {
-        if (selectedRegion !== '') {
-            navigate(`/game/${cookies.gameID}`);
-        } else {
-            setError('Wybierz region');
-        }
-    };
 
     return (
         <Wrapper>
             <Container>
                 <h1>Wybierz Region</h1>
                 <RegionsList />
+                {regionError && (
+                    <Error region>
+                        <p>{regionError}</p>
+                    </Error>
+                )}
             </Container>
             <Line />
             <Container>
                 <h1>Zmień ustawienia gry</h1>
                 <SettingWrapper>
                     <p>Liczba rund:</p>
-                    <Input type="number" name="rounds" value={rounds} min={1} max={4} onChange={handleSetRounds} />
+                    <Input type="number" name="rounds" value={rounds} min={1} max={5} onChange={(e) => setRounds(e.target.value)} />
                 </SettingWrapper>
                 <SettingWrapper>
                     <p>Czas rundy(s):</p>
-                    <Input type="number" name="roundTime" value={roundTime} min={10} max={60} onChange={handleSetRoundTime} />
+                    <Input type="number" name="roundTime" value={roundTime} min={10} max={60} onChange={(e) => setRoundTime(e.target.value)} />
                 </SettingWrapper>
-                <Button onClick={handleStart}>Rozpocznij</Button>
-                {error && <p>{error}</p>}
+                <Button onClick={handleStartGame}>Rozpocznij</Button>
+                {errors.length > 0 && (
+                    <Error>
+                        {errors.map((error, i) => (
+                            <p key={i}>{error}</p>
+                        ))}
+                    </Error>
+                )}
             </Container>
         </Wrapper>
     );

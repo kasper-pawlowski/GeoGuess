@@ -34,7 +34,7 @@ const Root = () => {
                                 />
                                 <Route path="/login" element={<LoginPage />} />
                                 <Route
-                                    path="/game/:gameID"
+                                    path="/game"
                                     element={
                                         <ProtectedRoute>
                                             <GamePage />

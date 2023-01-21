@@ -12,7 +12,7 @@ const Navbar = () => {
     return pathname !== '/login' ? (
         <Wrapper>
             <DisplayName>{user.displayName}</DisplayName>
-            <LogOutButton onClick={logOut}>Log out</LogOutButton>
+            <LogOutButton onClick={logOut}>Wyloguj</LogOutButton>
         </Wrapper>
     ) : (
         <Wrapper>login</Wrapper>

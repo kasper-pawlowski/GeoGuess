@@ -1,15 +1,38 @@
 import React from 'react';
-import { Name, Points, RangeTrack, RangeWrapper, Wrapper } from './SummaryItem.styles';
+import { useUserAuth } from '../../contexts/AuthContext';
+import { useGameCtx } from '../../contexts/GameContext';
+import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer } from './SummaryItem.styles';
 
-const SummaryItem = ({ distanceBetween }) => {
+const SummaryItem = ({ distanceBetween, pointsHistory, currentRound }) => {
+    const { user } = useUserAuth();
+
     return (
         <Wrapper>
-            <Name>Kasper Pawłowski</Name>
+            <Name>{user.displayName}</Name>
+            <Spacer />
             <RangeWrapper>
-                <RangeTrack />
-                <p>-{distanceBetween.toFixed(0)} m</p>
+                <RangeTrack distanceBetween={distanceBetween} />
+                <p>{distanceBetween} m</p>
             </RangeWrapper>
-            <Points>0 + 8 pkt</Points>
+            <Spacer />
+            <p>
+                {pointsHistory[currentRound]} + {distanceBetween >= 5000 ? -5000 : 5000 - distanceBetween} pkt
+            </p>
+        </Wrapper>
+    );
+};
+
+export const GameSummaryItem = ({ points }) => {
+    const { rounds } = useGameCtx();
+    const { user } = useUserAuth();
+
+    return (
+        <Wrapper>
+            <Name>{user.displayName}</Name>
+            <RangeWrapper>
+                <GameRangeTrack points={points} rounds={rounds} />
+            </RangeWrapper>
+            <p>{points} pkt</p>
         </Wrapper>
     );
 };
