@@ -10,20 +10,30 @@ export const Wrapper = styled.div`
     @media (max-width: 768px) {
         font-size: 0.8rem;
         gap: 15px;
+        flex-direction: column;
+
+        div:nth-child(1) {
+            display: flex;
+            justify-content: space-between;
+
+            @media (max-width: 768px) {
+                font-size: 0.9rem;
+            }
+        }
     }
 `;
 
 export const Name = styled.div`
-    /* width: 180px;
-    @media (max-width: 768px) {
-        min-width: auto;
-    } */
+    /* width: 180px; */
 `;
 
 export const Spacer = styled.div`
     width: 1px;
     height: 100%;
     background-color: black;
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 export const RangeWrapper = styled.div`
@@ -31,14 +41,16 @@ export const RangeWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 30px;
-    width: 400px;
 
+    @media (min-width: 910px) {
+        width: 400px;
+    }
+    @media (min-width: 768px) {
+        width: 300px;
+    }
     @media (max-width: 910px) {
         /* width: 300px; */
         flex: 1;
-    }
-    @media (max-width: 768px) {
-        width: 150px;
     }
 `;
 

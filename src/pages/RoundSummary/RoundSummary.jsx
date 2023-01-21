@@ -1,8 +1,11 @@
 import React from 'react';
-import SummaryItem from '../../components/SummaryItem/SummaryItem';
+import { useMediaQuery } from 'react-responsive';
+import SummaryItem, { MobileSummaryItem } from '../../components/SummaryItem/SummaryItem';
 import { Button, SummaryWrapper, Wrapper } from './RoundSummary.styles';
 
 const RoundSummary = ({ distanceBetween, setView, setCurrentRound, dataLength, currentRound, points, pointsHistory }) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+
     const handleNextRound = () => {
         if (currentRound + 1 == dataLength) {
             setView('gameSummary');
@@ -16,7 +19,18 @@ const RoundSummary = ({ distanceBetween, setView, setCurrentRound, dataLength, c
         <Wrapper>
             <h1>Runda zakończona!</h1>
             <SummaryWrapper>
-                <SummaryItem distanceBetween={distanceBetween} points={points} pointsHistory={pointsHistory} currentRound={currentRound} />
+                {isMobile ? (
+                    <>
+                        <MobileSummaryItem
+                            distanceBetween={distanceBetween}
+                            points={points}
+                            pointsHistory={pointsHistory}
+                            currentRound={currentRound}
+                        />
+                    </>
+                ) : (
+                    <SummaryItem distanceBetween={distanceBetween} points={points} pointsHistory={pointsHistory} currentRound={currentRound} />
+                )}
             </SummaryWrapper>
             <Button onClick={handleNextRound}>Kontynuuj</Button>
         </Wrapper>
