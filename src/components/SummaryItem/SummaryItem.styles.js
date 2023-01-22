@@ -75,3 +75,8 @@ export const GameRangeTrack = styled(RangeTrack)`
         width: ${({ points, rounds }) => (points / (rounds * 5000)) * 100}%;
     }
 `;
+
+export const Points = styled.p`
+    display: flex;
+    align-items: center;
+`;
