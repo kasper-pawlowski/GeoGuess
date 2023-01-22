@@ -17,7 +17,7 @@ const GameSummary = ({ points }) => {
     return (
         <Wrapper>
             <h1>Gra zakończona!</h1>
-            <h3>Maksymalna liczba punktów do zdobycia wynosi {rounds * 5000}</h3>
+            {/* <h3>Maksymalna liczba punktów do zdobycia wynosi {rounds * 5000}</h3> */}
             <SummaryWrapper>{isMobile ? <MobileGameSummaryItem points={points} /> : <GameSummaryItem points={points} />}</SummaryWrapper>
             <Button onClick={handleEndGame}>Do strony głównej</Button>
         </Wrapper>

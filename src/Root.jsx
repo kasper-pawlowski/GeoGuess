@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { UserAuthContextProvider } from './contexts/AuthContext';
 import GameSetupPage from './pages/GameSetupPage/GameSetupPage';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -13,8 +13,24 @@ import Skyscrapers from './components/Skyscrapers';
 import Layout, { LayoutContent } from './components/Layout';
 import GamePage from './pages/GamePage/GamePage';
 import NotFound from './pages/NotFound/NotFound';
+import { useEffect } from 'react';
+import { auth } from './services/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Root = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
+            if (!currentuser) {
+                navigate('/login');
+            }
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, [auth]);
+
     return (
         <UserAuthContextProvider>
             <GameContextProvider>

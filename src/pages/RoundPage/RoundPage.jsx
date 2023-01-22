@@ -4,10 +4,13 @@ import Map from '../../components/Map/Map';
 import { useGameCtx } from '../../contexts/GameContext';
 import Timer from '../../components/Timer/Timer';
 import { Navigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import Spinner from '../../components/Spinner';
 
 const RoundPage = ({ user, data, distanceBetween, setDistanceBetween, currentRound, setView, setPoints, points, setPointsHistory }) => {
     const { roundTime, selectedRegion } = useGameCtx();
     const [loading, isLoading] = useState(true);
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     useEffect(() => {
         if (data.length) {
@@ -31,13 +34,19 @@ const RoundPage = ({ user, data, distanceBetween, setDistanceBetween, currentRou
     };
 
     if (!selectedRegion) return <Navigate to="/" />;
-    if (loading) return <Wrapper>Loading...</Wrapper>;
+    if (loading) {
+        return (
+            <Wrapper>
+                <Spinner />
+            </Wrapper>
+        );
+    }
 
     return (
         !loading && (
             <Wrapper>
                 <ImageWrapper>
-                    <Img src={data[currentRound]?.img} alt="" />
+                    <Img src={isMobile ? data[currentRound]?.img_s : data[currentRound]?.img} alt="" />
                 </ImageWrapper>
                 <RightContainer>
                     <Ranking>
