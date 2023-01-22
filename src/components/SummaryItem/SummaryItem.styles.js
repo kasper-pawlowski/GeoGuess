@@ -25,7 +25,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Name = styled.div`
-    width: 100px;
+    width: 120px;
 `;
 
 export const Spacer = styled.div`
