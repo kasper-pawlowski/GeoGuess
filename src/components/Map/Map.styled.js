@@ -16,7 +16,9 @@ export const Wrapper = styled.div`
         height: 100%;
     }
 
-    .leaflet-marker-icon {
-        filter: hue-rotate(290deg) brightness(1.2);
+    .userMarker {
+        .leaflet-marker-icon {
+            filter: hue-rotate(290deg) brightness(1.2);
+        }
     }
 `;

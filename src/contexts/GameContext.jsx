@@ -27,10 +27,6 @@ export function GameContextProvider({ children }) {
         },
     ]);
 
-    useEffect(() => {
-        console.log(aiData);
-    }, [aiData]);
-
     return (
         <gameContext.Provider value={{ rounds, setRounds, roundTime, setRoundTime, selectedRegion, setSelectedRegion, aiData, setAiData }}>
             {children}

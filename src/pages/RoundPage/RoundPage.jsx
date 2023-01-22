@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ImageWrapper, Img, Ranking, RankingItem, UserRankingItem, RightContainer, Wrapper } from './RoundPage.styles';
+import { ImageWrapper, Ranking, RankingItem, UserRankingItem, RightContainer, Wrapper } from './RoundPage.styles';
 import Map from '../../components/Map/Map';
 import { useGameCtx } from '../../contexts/GameContext';
 import Timer from '../../components/Timer/Timer';
@@ -8,6 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import Spinner from '../../components/Spinner';
 import { useUserAuth } from '../../contexts/AuthContext';
 import useAiFunctions from '../../hooks/useAiFunctions';
+import Image from '../../components/Image/Image';
 
 const RoundPage = ({ data, distanceBetween, setDistanceBetween, currentRound, setView, setPoints, points, setPointsHistory }) => {
     const { roundTime, selectedRegion, aiData } = useGameCtx();
@@ -56,7 +57,7 @@ const RoundPage = ({ data, distanceBetween, setDistanceBetween, currentRound, se
         !loading && (
             <Wrapper>
                 <ImageWrapper>
-                    <Img src={isMobile ? data[currentRound]?.img_s : data[currentRound]?.img} alt="" />
+                    <Image src={isMobile ? data[currentRound]?.img_s : data[currentRound]?.img} />
                 </ImageWrapper>
                 <RightContainer>
                     <Ranking>

@@ -21,7 +21,7 @@ const Map = ({ coordinates, setDistanceBetween, handleNextRound }) => {
             },
         });
 
-        return markerCoords ? <Marker position={markerCoords} /> : null;
+        return markerCoords ? <Marker className="userMarker" position={markerCoords} /> : null;
     };
 
     useEffect(() => {
