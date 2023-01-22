@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     gap: 30px;
     padding: 12px 20px;
     background-color: #f4f4f4;
+    border: 1px solid ${({ isUserSummary, theme }) => (isUserSummary ? theme.colors.accent : '#f4f4f4')};
     border-radius: 7px;
     font-size: 1.1rem;
     @media (max-width: 768px) {
@@ -24,7 +25,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Name = styled.div`
-    /* width: 180px; */
+    width: 100px;
 `;
 
 export const Spacer = styled.div`
@@ -42,14 +43,10 @@ export const RangeWrapper = styled.div`
     align-items: center;
     gap: 30px;
 
-    @media (min-width: 910px) {
+    @media (min-width: 768px) {
         width: 400px;
     }
-    @media (min-width: 768px) {
-        width: 300px;
-    }
     @media (max-width: 910px) {
-        /* width: 300px; */
         flex: 1;
     }
 `;

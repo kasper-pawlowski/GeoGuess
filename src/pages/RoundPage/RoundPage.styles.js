@@ -69,24 +69,9 @@ export const RankingItem = styled.div`
     span {
         text-align: center;
         margin-left: auto;
-        /* background-color: lightgrey; */
     }
-
-    /* &&::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        translate: 0 -50%;
-        right: 66px;
-        width: 1px;
-        height: 60%;
-        background-color: black;
-        border-radius: 100vw;
-    } */
 `;
 
-export const RankingMyItem = styled(RankingItem)`
-    p {
-        color: green;
-    }
+export const UserRankingItem = styled(RankingItem)`
+    border: 1px solid ${({ theme }) => theme.colors.accent};
 `;

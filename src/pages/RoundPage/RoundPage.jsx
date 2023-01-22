@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { ImageWrapper, Img, Ranking, RankingItem, RankingMyItem, RightContainer, Wrapper } from './RoundPage.styles';
+import { ImageWrapper, Img, Ranking, RankingItem, UserRankingItem, RightContainer, Wrapper } from './RoundPage.styles';
 import Map from '../../components/Map/Map';
 import { useGameCtx } from '../../contexts/GameContext';
 import Timer from '../../components/Timer/Timer';
 import { Navigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Spinner from '../../components/Spinner';
+import { useUserAuth } from '../../contexts/AuthContext';
+import useAiFunctions from '../../hooks/useAiFunctions';
 
-const RoundPage = ({ user, data, distanceBetween, setDistanceBetween, currentRound, setView, setPoints, points, setPointsHistory }) => {
-    const { roundTime, selectedRegion } = useGameCtx();
+const RoundPage = ({ data, distanceBetween, setDistanceBetween, currentRound, setView, setPoints, points, setPointsHistory }) => {
+    const { roundTime, selectedRegion, aiData } = useGameCtx();
     const [loading, isLoading] = useState(true);
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const { user } = useUserAuth();
+    const { setPointsForAi, setPointsHistoryForAi } = useAiFunctions();
 
     useEffect(() => {
         if (data.length) {
             isLoading(false);
         }
     }, [data]);
+
+    useEffect(() => {
+        setPointsHistoryForAi();
+    }, [aiData.points]);
 
     const handleNextRound = () => {
         if (distanceBetween >= 5000) {
@@ -25,6 +33,8 @@ const RoundPage = ({ user, data, distanceBetween, setDistanceBetween, currentRou
             setPoints((points) => points + (5000 - distanceBetween));
         }
         setPointsHistory((prevPoints) => [...prevPoints, points]);
+        setPointsForAi();
+
         setView('roundSummary');
     };
 
@@ -50,22 +60,16 @@ const RoundPage = ({ user, data, distanceBetween, setDistanceBetween, currentRou
                 </ImageWrapper>
                 <RightContainer>
                     <Ranking>
-                        <RankingMyItem>
+                        <UserRankingItem>
                             <p>{user.displayName}</p>
                             <span>{points}</span>
-                        </RankingMyItem>
-                        <RankingItem>
-                            <p>Maciej</p>
-                            <span>7</span>
-                        </RankingItem>
-                        <RankingItem>
-                            <p>Michał</p>
-                            <span>2</span>
-                        </RankingItem>
-                        <RankingItem>
-                            <p>Agata</p>
-                            <span>0</span>
-                        </RankingItem>
+                        </UserRankingItem>
+                        {aiData.map((e) => (
+                            <RankingItem key={e.name}>
+                                <p>{e.name}</p>
+                                <span>{e.points}</span>
+                            </RankingItem>
+                        ))}
                     </Ranking>
                     <Timer time={roundTime} handleTimeIsUp={handleTimeIsUp} />
                     <Map setDistanceBetween={setDistanceBetween} coordinates={data[currentRound].coordinates} handleNextRound={handleNextRound} />

@@ -4,12 +4,10 @@ import RoundSummary from '../RoundSummary/RoundSummary';
 import GameSummary from '../GameSummary/GameSummary';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
-import { useUserAuth } from '../../contexts/AuthContext';
 import { useGameCtx } from '../../contexts/GameContext';
 
 const GamePage = () => {
     const { rounds, selectedRegion } = useGameCtx();
-    const { user } = useUserAuth();
     const [currentRound, setCurrentRound] = useState(0);
     const [data, setData] = useState([]);
     const [distanceBetween, setDistanceBetween] = useState(null);
@@ -34,7 +32,6 @@ const GamePage = () => {
         <>
             {view === 'round' && (
                 <RoundPage
-                    user={user}
                     data={data}
                     distanceBetween={distanceBetween}
                     setDistanceBetween={setDistanceBetween}

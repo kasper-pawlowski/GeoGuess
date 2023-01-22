@@ -3,10 +3,12 @@ import { Wrapper } from './Map.styled';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import { calculateDistance } from '../../helpers/calculateDistance';
 import { getApproximateCoords } from '../../helpers/getApproximateCoords';
+import useAiFunctions from '../../hooks/useAiFunctions';
 
 const Map = ({ coordinates, setDistanceBetween, handleNextRound }) => {
     const [markerCoords, setMarkerCoords] = useState(null);
     let timeoutId = null;
+    const { addRandomDistanceForAi } = useAiFunctions();
 
     const targetPosition = [coordinates?.lat, coordinates?.lng];
 
@@ -15,6 +17,7 @@ const Map = ({ coordinates, setDistanceBetween, handleNextRound }) => {
             click: (e) => {
                 setMarkerCoords([e.latlng.lat, e.latlng.lng]);
                 setDistanceBetween(calculateDistance(targetPosition[0], targetPosition[1], e.latlng.lat, e.latlng.lng));
+                addRandomDistanceForAi();
             },
         });
 

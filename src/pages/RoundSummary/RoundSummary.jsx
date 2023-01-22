@@ -1,10 +1,10 @@
 import React from 'react';
-import { useMediaQuery } from 'react-responsive';
-import SummaryItem, { MobileSummaryItem } from '../../components/SummaryItem/SummaryItem';
+import { SummaryItem } from '../../components/SummaryItem/SummaryItem';
+import { useGameCtx } from '../../contexts/GameContext';
 import { Button, SummaryWrapper, Wrapper } from './RoundSummary.styles';
 
 const RoundSummary = ({ distanceBetween, setView, setCurrentRound, dataLength, currentRound, points, pointsHistory }) => {
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const { aiData } = useGameCtx();
 
     const handleNextRound = () => {
         if (currentRound + 1 == dataLength) {
@@ -19,18 +19,18 @@ const RoundSummary = ({ distanceBetween, setView, setCurrentRound, dataLength, c
         <Wrapper>
             <h1>Runda zakończona!</h1>
             <SummaryWrapper>
-                {isMobile ? (
-                    <>
-                        <MobileSummaryItem
-                            distanceBetween={distanceBetween}
-                            points={points}
-                            pointsHistory={pointsHistory}
-                            currentRound={currentRound}
-                        />
-                    </>
-                ) : (
-                    <SummaryItem distanceBetween={distanceBetween} points={points} pointsHistory={pointsHistory} currentRound={currentRound} />
-                )}
+                <>
+                    <SummaryItem
+                        isUserSummary={true}
+                        distanceBetween={distanceBetween}
+                        points={points}
+                        pointsHistory={pointsHistory}
+                        currentRound={currentRound}
+                    />
+                    {aiData.map((e) => (
+                        <SummaryItem key={e?.name} isUserSummary={false} aiData={e} currentRound={currentRound} />
+                    ))}
+                </>
             </SummaryWrapper>
             <Button onClick={handleNextRound}>Kontynuuj</Button>
         </Wrapper>
