@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import Spinner from '../Spinner';
-import { Img } from './Image.styles';
+import { ImageWrapper, Img } from './Image.styles';
 
 const Image = ({ src }) => {
     const [loading, isLoading] = useState(true);
 
     return (
         <>
-            {loading && <Spinner />}
+            {loading && (
+                <ImageWrapper>
+                    <Spinner />
+                </ImageWrapper>
+            )}
             <Img src={src} alt="" onLoad={() => isLoading(false)} style={{ display: loading ? 'none' : 'block' }} />
         </>
     );
