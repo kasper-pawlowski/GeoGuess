@@ -8,19 +8,43 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, cur
     const { user } = useUserAuth();
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
+    const returnUserPoints = () => {
+        if (distanceBetween) {
+            if (distanceBetween >= 5000) {
+                return 0;
+            } else {
+                return 5000 - distanceBetween;
+            }
+        } else {
+            return 0;
+        }
+    };
+
+    const returnAiPoints = () => {
+        if (aiData?.distance) {
+            if (aiData.distance >= 5000) {
+                return 0;
+            } else {
+                return 5000 - aiData.distance;
+            }
+        } else {
+            return 0;
+        }
+    };
+
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
             <div>
                 <Name>{isUserSummary ? user.displayName : aiData?.name}</Name>
                 <Points>
                     {isUserSummary
-                        ? `${pointsHistory[currentRound]} + ${distanceBetween >= 5000 ? -5000 : 5000 - distanceBetween} pkt`
-                        : `${aiData?.pointsHistory[currentRound]} + ${aiData?.distance >= 5000 ? -5000 : 5000 - aiData?.distance} pkt`}
+                        ? `${pointsHistory[currentRound]} + ${returnUserPoints()} pkt`
+                        : `${aiData?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
                 </Points>
             </div>
             <RangeWrapper>
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : aiData?.distance} />
-                <p>{isUserSummary ? distanceBetween : aiData?.distance} m</p>
+                <p>{isUserSummary ? (distanceBetween ? distanceBetween : 'X') : aiData?.distance} m</p>
             </RangeWrapper>
         </Wrapper>
     ) : (
@@ -29,13 +53,13 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, cur
             <Spacer />
             <RangeWrapper>
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : aiData?.distance} />
-                <p>{isUserSummary ? distanceBetween : aiData?.distance} m</p>
+                <p>{isUserSummary ? (distanceBetween ? distanceBetween : 'X') : aiData?.distance} m</p>
             </RangeWrapper>
             <Spacer />
             <Points>
                 {isUserSummary
-                    ? `${pointsHistory[currentRound]} + ${distanceBetween >= 5000 ? -5000 : 5000 - distanceBetween} pkt`
-                    : `${aiData?.pointsHistory[currentRound]} + ${aiData?.distance >= 5000 ? -5000 : 5000 - aiData?.distance} pkt`}
+                    ? `${pointsHistory[currentRound]} + ${returnUserPoints()} pkt`
+                    : `${aiData?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
             </Points>
         </Wrapper>
     );

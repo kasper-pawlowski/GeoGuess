@@ -1,6 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const animation = keyframes`
+    0%{opacity: 0}
+    100%{ opacity: 1}
+`;
 
 export const Img = styled.img`
+    animation: ${animation} 0.2s linear;
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;

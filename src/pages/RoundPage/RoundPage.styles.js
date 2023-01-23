@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Wrapper = styled.div`
     flex: 1;
@@ -16,11 +16,15 @@ export const ImageWrapper = styled.div`
     height: 100%;
     display: flex;
     overflow: hidden;
-    justify-content: center;
-    align-items: center;
+`;
+
+const animation = keyframes`
+    0%{opacity: 0}
+    100%{ opacity: 1}
 `;
 
 export const RightContainer = styled.div`
+    animation: ${animation} 0.2s linear;
     display: flex;
     height: 100%;
     flex-direction: column;

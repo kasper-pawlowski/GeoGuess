@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Wrapper } from './Map.styled';
-import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMapEvents, Polyline } from 'react-leaflet';
 import { calculateDistance } from '../../helpers/calculateDistance';
 import { getApproximateCoords } from '../../helpers/getApproximateCoords';
 import useAiFunctions from '../../hooks/useAiFunctions';
+import { theme } from '../../styles/theme';
 
-const Map = ({ coordinates, setDistanceBetween, handleNextRound }) => {
+const Map = ({ coordinates, setDistanceBetween, handleNextRound, secondsLeft }) => {
     const [markerCoords, setMarkerCoords] = useState(null);
+    const [clicked, isClicked] = useState(false);
     let timeoutId = null;
-    const { addRandomDistanceForAi } = useAiFunctions();
 
     const targetPosition = [coordinates?.lat, coordinates?.lng];
 
-    const MyMarker = () => {
+    const UserMarker = () => {
         useMapEvents({
             click: (e) => {
-                setMarkerCoords([e.latlng.lat, e.latlng.lng]);
+                clicked === false && setMarkerCoords([e.latlng.lat, e.latlng.lng]);
                 setDistanceBetween(calculateDistance(targetPosition[0], targetPosition[1], e.latlng.lat, e.latlng.lng));
-                addRandomDistanceForAi();
             },
         });
 
@@ -26,14 +26,28 @@ const Map = ({ coordinates, setDistanceBetween, handleNextRound }) => {
 
     useEffect(() => {
         if (markerCoords) {
+            isClicked(true);
+        }
+    }, [markerCoords]);
+
+    // useEffect(() => {
+    //     if (clicked || secondsLeft === 0) {
+
+    //     }
+    // }, [secondsLeft, clicked]);
+
+    useEffect(() => {
+        if (markerCoords) {
             timeoutId = setTimeout(() => {
                 handleNextRound();
-            }, 500);
+            }, 1000);
         }
         return () => {
             clearTimeout(timeoutId);
         };
     }, [markerCoords]);
+
+    const colorOptions = { color: theme.colors.accent };
 
     return (
         coordinates && (
@@ -49,7 +63,17 @@ const Map = ({ coordinates, setDistanceBetween, handleNextRound }) => {
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <MyMarker />
+                    <UserMarker />
+                    {markerCoords && <Marker position={targetPosition} />}
+                    {markerCoords && (
+                        <Polyline
+                            pathOptions={colorOptions}
+                            positions={[
+                                [targetPosition[0], targetPosition[1]],
+                                [markerCoords[0], markerCoords[1]],
+                            ]}
+                        />
+                    )}
                 </MapContainer>
             </Wrapper>
         )

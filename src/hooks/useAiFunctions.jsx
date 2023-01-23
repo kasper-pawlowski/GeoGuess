@@ -3,35 +3,17 @@ import { useGameCtx } from '../contexts/GameContext';
 const useAiFunctions = () => {
     const { aiData, setAiData } = useGameCtx();
 
-    const addRandomDistanceForAi = () => {
-        const newDistanceHistory = aiData.map((e) => {
+    const updateAiData = async () => {
+        const newDistanceHistory = await aiData.map((e) => {
             const newDistance = Math.round(Math.random() * 4999 + 1);
             return {
                 ...e,
                 distance: newDistance,
-            };
-        });
-        setAiData(newDistanceHistory);
-    };
-
-    const setPointsForAi = () => {
-        const newPoints = aiData.map((e) => {
-            return {
-                ...e,
-                points: e.distance >= 5000 ? e.points - 5000 : e.points + (5000 - e.distance),
-            };
-        });
-        setAiData(newPoints);
-    };
-
-    const setPointsHistoryForAi = () => {
-        const newPointsHistory = aiData.map((e) => {
-            return {
-                ...e,
+                points: e.points + (5000 - newDistance),
                 pointsHistory: e.pointsHistory.concat(e.points),
             };
         });
-        setAiData(newPointsHistory);
+        setAiData(newDistanceHistory);
     };
 
     const resetAiState = () => {
@@ -57,7 +39,7 @@ const useAiFunctions = () => {
         ]);
     };
 
-    return { addRandomDistanceForAi, resetAiState, setPointsForAi, setPointsHistoryForAi };
+    return { updateAiData, resetAiState };
 };
 
 export default useAiFunctions;

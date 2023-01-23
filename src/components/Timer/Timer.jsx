@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyledIcon, StyledSpan, Wrapper } from './Timer.styles';
 
-const Timer = ({ time, handleTimeIsUp }) => {
-    const [secondsLeft, setSecondsLeft] = useState(time);
+const Timer = ({ handleTimeIsUp, secondsLeft, setSecondsLeft }) => {
     let intervalId = null;
 
     useEffect(() => {

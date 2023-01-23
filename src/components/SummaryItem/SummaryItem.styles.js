@@ -60,7 +60,7 @@ export const RangeTrack = styled.div`
         content: '';
         position: absolute;
         height: 10px;
-        width: ${({ distanceBetween }) => 100 - (distanceBetween / 5000) * 100}%;
+        width: ${({ distanceBetween }) => (distanceBetween ? 100 - (distanceBetween / 5000) * 100 : 0)}%;
 
         background-color: ${({ theme }) => theme.colors.accent};
         top: 50%;
@@ -79,4 +79,5 @@ export const GameRangeTrack = styled(RangeTrack)`
 export const Points = styled.p`
     display: flex;
     align-items: center;
+    margin-left: auto;
 `;
