@@ -2,12 +2,12 @@ import { createContext, useContext, useState } from 'react';
 
 const gameContext = createContext();
 
-export function GameContextProvider({ children }) {
-    const [currentRound, setCurrentRound] = useState(0);
-    const [distanceBetween, setDistanceBetween] = useState(null);
-    const [points, setPoints] = useState(0);
-    const [pointsHistory, setPointsHistory] = useState([]);
-    const [aiData, setAiData] = useState([
+const initialState = {
+    currentRound: 0,
+    distanceBetween: null,
+    points: 0,
+    pointsHistory: [],
+    aiData: [
         {
             name: 'Maciej',
             points: 0,
@@ -26,9 +26,42 @@ export function GameContextProvider({ children }) {
             pointsHistory: [],
             distance: null,
         },
-    ]);
+    ],
+};
 
-    return <gameContext.Provider value={{ aiData, setAiData, currentRound, setCurrentRound }}>{children}</gameContext.Provider>;
+export function GameContextProvider({ children }) {
+    const [currentRound, setCurrentRound] = useState(initialState.currentRound);
+    const [distanceBetween, setDistanceBetween] = useState(initialState.distanceBetween);
+    const [points, setPoints] = useState(initialState.points);
+    const [pointsHistory, setPointsHistory] = useState(initialState.pointsHistory);
+    const [aiData, setAiData] = useState(initialState.aiData);
+
+    const resetGameContext = () => {
+        setCurrentRound(initialState.currentRound);
+        setDistanceBetween(initialState.distanceBetween);
+        setPoints(initialState.points);
+        setPointsHistory(initialState.pointsHistory);
+        setAiData(initialState.aiData);
+    };
+
+    return (
+        <gameContext.Provider
+            value={{
+                aiData,
+                setAiData,
+                currentRound,
+                setCurrentRound,
+                distanceBetween,
+                setDistanceBetween,
+                points,
+                setPoints,
+                pointsHistory,
+                setPointsHistory,
+                resetGameContext,
+            }}>
+            {children}
+        </gameContext.Provider>
+    );
 }
 
 export function useGameCtx() {

@@ -5,9 +5,9 @@ import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
 import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer, Points } from './SummaryItem.styles';
 
-export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, aiData }) => {
+export const SummaryItem = ({ isUserSummary, data }) => {
     const { user } = useUserAuth();
-    const { currentRound } = useGameCtx();
+    const { currentRound, pointsHistory, distanceBetween } = useGameCtx();
     const isMobile = useMediaQuery({ query: '(max-width: 910px)' });
 
     const returnUserPoints = () => {
@@ -23,11 +23,11 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, aiD
     };
 
     const returnAiPoints = () => {
-        if (aiData?.distance) {
-            if (aiData.distance >= 5000) {
+        if (data?.distance) {
+            if (data.distance >= 5000) {
                 return 0;
             } else {
-                return 5000 - aiData.distance;
+                return 5000 - data.distance;
             }
         } else {
             return 0;
@@ -37,58 +37,59 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, aiD
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
             <div>
-                <Name>{isUserSummary ? user.displayName : aiData?.name}</Name>
+                <Name>{isUserSummary ? user.displayName : data?.name}</Name>
                 <Points>
                     {isUserSummary
                         ? `${pointsHistory[currentRound]} + ${returnUserPoints()} pkt`
-                        : `${aiData?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
+                        : `${data?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
                 </Points>
             </div>
             <RangeWrapper>
-                <RangeTrack distanceBetween={isUserSummary ? distanceBetween : aiData?.distance} />
-                <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : aiData?.distance} m</p>
+                <RangeTrack distanceBetween={isUserSummary ? distanceBetween : data?.distance} />
+                <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : data?.distance} m</p>
             </RangeWrapper>
         </Wrapper>
     ) : (
         <Wrapper isUserSummary={isUserSummary}>
-            <Name>{isUserSummary ? user.displayName : aiData?.name}</Name>
+            <Name>{isUserSummary ? user.displayName : data?.name}</Name>
             <Spacer />
             <RangeWrapper>
-                <RangeTrack distanceBetween={isUserSummary ? distanceBetween : aiData?.distance} />
-                <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : aiData?.distance} m</p>
+                <RangeTrack distanceBetween={isUserSummary ? distanceBetween : data?.distance} />
+                <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : data?.distance} m</p>
             </RangeWrapper>
             <Spacer />
             <Points>
                 {isUserSummary
                     ? `${pointsHistory[currentRound]} + ${returnUserPoints()} pkt`
-                    : `${aiData?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
+                    : `${data?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
             </Points>
         </Wrapper>
     );
 };
 
-export const GameSummaryItem = ({ points, isUserSummary, aiData }) => {
+export const GameSummaryItem = ({ isUserSummary, data }) => {
     const { rounds } = useGameConfigCtx();
+    const { points } = useGameCtx();
     const { user } = useUserAuth();
     const isMobile = useMediaQuery({ query: '(max-width: 910px)' });
 
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
             <div>
-                <Name>{isUserSummary ? user.displayName : aiData?.name}</Name>
-                <Points>{isUserSummary ? points : aiData?.points} pkt</Points>
+                <Name>{isUserSummary ? user.displayName : data?.name}</Name>
+                <Points>{isUserSummary ? points : data?.points} pkt</Points>
             </div>
             <RangeWrapper>
-                <GameRangeTrack points={isUserSummary ? points : aiData?.points} rounds={rounds} />
+                <GameRangeTrack points={isUserSummary ? points : data?.points} rounds={rounds} />
             </RangeWrapper>
         </Wrapper>
     ) : (
         <Wrapper isUserSummary={isUserSummary}>
-            <Name>{isUserSummary ? user.displayName : aiData?.name}</Name>
+            <Name>{isUserSummary ? user.displayName : data?.name}</Name>
             <RangeWrapper>
-                <GameRangeTrack points={isUserSummary ? points : aiData?.points} rounds={rounds} />
+                <GameRangeTrack points={isUserSummary ? points : data?.points} rounds={rounds} />
             </RangeWrapper>
-            <Points>{isUserSummary ? points : aiData?.points} pkt</Points>
+            <Points>{isUserSummary ? points : data?.points} pkt</Points>
         </Wrapper>
     );
 };

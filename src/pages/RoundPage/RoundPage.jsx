@@ -8,18 +8,15 @@ import { Navigate } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import Spinner from '../../components/Spinner';
 import { useUserAuth } from '../../contexts/AuthContext';
-import useAiFunctions from '../../hooks/useAiFunctions';
 import Image from '../../components/Image/Image';
 
-const RoundPage = ({ data, distanceBetween, setDistanceBetween, setView, setPoints, points, setPointsHistory }) => {
+const RoundPage = ({ data, setView }) => {
     const { roundTime, selectedRegion } = useGameConfigCtx();
-    const { currentRound } = useGameCtx();
-    const { aiData } = useGameCtx();
+    const { aiData, points, setPoints, setPointsHistory, distanceBetween, setDistanceBetween, currentRound, setAiData } = useGameCtx();
     const [loading, isLoading] = useState(true);
     const [secondsLeft, setSecondsLeft] = useState(roundTime);
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const { user } = useUserAuth();
-    const { updateAiData } = useAiFunctions();
 
     useEffect(() => {
         if (data.length) {
@@ -43,6 +40,19 @@ const RoundPage = ({ data, distanceBetween, setDistanceBetween, setView, setPoin
         updateAiData();
         setDistanceBetween(null);
         setView('roundSummary');
+    };
+
+    const updateAiData = async () => {
+        const newDistanceHistory = await aiData.map((e) => {
+            const newDistance = Math.round(Math.random() * 4999 + 1);
+            return {
+                ...e,
+                distance: newDistance,
+                points: e.points + (5000 - newDistance),
+                pointsHistory: e.pointsHistory.concat(e.points),
+            };
+        });
+        setAiData(newDistanceHistory);
     };
 
     if (!selectedRegion) return <Navigate to="/" />;
@@ -74,12 +84,7 @@ const RoundPage = ({ data, distanceBetween, setDistanceBetween, setView, setPoin
                         ))}
                     </Ranking>
                     <Timer handleTimeIsUp={handleTimeIsUp} secondsLeft={secondsLeft} setSecondsLeft={setSecondsLeft} />
-                    <Map
-                        setDistanceBetween={setDistanceBetween}
-                        coordinates={data[currentRound].coordinates}
-                        handleNextRound={handleNextRound}
-                        secondsLeft={secondsLeft}
-                    />
+                    <Map coordinates={data[currentRound].coordinates} handleNextRound={handleNextRound} />
                 </RightContainer>
             </Wrapper>
         )

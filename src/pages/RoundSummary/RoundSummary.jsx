@@ -3,7 +3,7 @@ import { SummaryItem } from '../../components/SummaryItem/SummaryItem';
 import { useGameCtx } from '../../contexts/GameContext';
 import { Button, SummaryWrapper, Wrapper } from './RoundSummary.styles';
 
-const RoundSummary = ({ distanceBetween, setView, dataLength, points, pointsHistory }) => {
+const RoundSummary = ({ setView, dataLength }) => {
     const { aiData, currentRound, setCurrentRound } = useGameCtx();
 
     const handleNextRound = () => {
@@ -20,15 +20,9 @@ const RoundSummary = ({ distanceBetween, setView, dataLength, points, pointsHist
             <h1>Runda zakończona!</h1>
             <SummaryWrapper>
                 <>
-                    <SummaryItem
-                        isUserSummary={true}
-                        distanceBetween={distanceBetween}
-                        points={points}
-                        pointsHistory={pointsHistory}
-                        currentRound={currentRound}
-                    />
+                    <SummaryItem isUserSummary={true} />
                     {aiData.map((e) => (
-                        <SummaryItem key={e?.name} isUserSummary={false} aiData={e} currentRound={currentRound} />
+                        <SummaryItem key={e?.name} isUserSummary={false} data={e} />
                     ))}
                 </>
             </SummaryWrapper>

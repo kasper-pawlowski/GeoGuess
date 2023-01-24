@@ -5,8 +5,10 @@ import { calculateDistance } from '../../helpers/calculateDistance';
 import { getApproximateCoords } from '../../helpers/getApproximateCoords';
 import { theme } from '../../styles/theme';
 import L from 'leaflet';
+import { useGameCtx } from '../../contexts/GameContext';
 
-const Map = ({ coordinates, setDistanceBetween, handleNextRound, secondsLeft }) => {
+const Map = ({ coordinates, handleNextRound }) => {
+    const { setDistanceBetween } = useGameCtx();
     const [markerCoords, setMarkerCoords] = useState(null);
     const [clicked, isClicked] = useState(false);
     let timeoutId = null;

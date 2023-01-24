@@ -2,20 +2,18 @@ import React, { useEffect } from 'react';
 import Error from '../../components/Error/Error.jsx';
 import RegionsList from '../../components/RegionsList/RegionsList.jsx';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext.jsx';
-import useAiFunctions from '../../hooks/useAiFunctions.jsx';
+import { useGameCtx } from '../../contexts/GameContext.jsx';
 import useGameConditions from '../../hooks/useGameConditions.jsx';
 import { Button, Container, Input, Line, SettingWrapper, Wrapper } from './GameSetupPage.styles.js';
 
 const GameSetupPage = () => {
-    const { rounds, setRounds, roundTime, setRoundTime, setSelectedRegion } = useGameConfigCtx();
+    const { rounds, setRounds, roundTime, setRoundTime, resetGameConfigContext } = useGameConfigCtx();
     const { errors, handleStartGame, regionError } = useGameConditions();
-    const { resetAiState } = useAiFunctions();
+    const { resetGameContext } = useGameCtx();
 
     useEffect(() => {
-        setSelectedRegion('');
-        setRounds(5);
-        setRoundTime(60);
-        resetAiState();
+        resetGameConfigContext();
+        resetGameContext();
     }, []);
 
     return (

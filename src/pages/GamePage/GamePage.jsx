@@ -5,14 +5,12 @@ import GameSummary from '../GameSummary/GameSummary';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext';
+import { useGameCtx } from '../../contexts/GameContext';
 
 const GamePage = () => {
     const { rounds, selectedRegion } = useGameConfigCtx();
     const [view, setView] = useState('round');
     const [data, setData] = useState([]);
-    const [distanceBetween, setDistanceBetween] = useState(null);
-    const [points, setPoints] = useState(0);
-    const [pointsHistory, setPointsHistory] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,27 +27,9 @@ const GamePage = () => {
 
     return (
         <>
-            {view === 'round' && (
-                <RoundPage
-                    data={data}
-                    distanceBetween={distanceBetween}
-                    setDistanceBetween={setDistanceBetween}
-                    setView={setView}
-                    points={points}
-                    setPoints={setPoints}
-                    setPointsHistory={setPointsHistory}
-                />
-            )}
-            {view === 'roundSummary' && (
-                <RoundSummary
-                    dataLength={data.length}
-                    distanceBetween={distanceBetween}
-                    setView={setView}
-                    points={points}
-                    pointsHistory={pointsHistory}
-                />
-            )}
-            {view === 'gameSummary' && <GameSummary points={points} />}
+            {view === 'round' && <RoundPage data={data} setView={setView} />}
+            {view === 'roundSummary' && <RoundSummary dataLength={data.length} setView={setView} />}
+            {view === 'gameSummary' && <GameSummary />}
         </>
     );
 };
