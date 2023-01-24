@@ -4,14 +4,13 @@ import RoundSummary from '../RoundSummary/RoundSummary';
 import GameSummary from '../GameSummary/GameSummary';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
-import { useGameCtx } from '../../contexts/GameContext';
+import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 
 const GamePage = () => {
-    const { rounds, selectedRegion } = useGameCtx();
-    const [currentRound, setCurrentRound] = useState(0);
+    const { rounds, selectedRegion } = useGameConfigCtx();
+    const [view, setView] = useState('round');
     const [data, setData] = useState([]);
     const [distanceBetween, setDistanceBetween] = useState(null);
-    const [view, setView] = useState('round');
     const [points, setPoints] = useState(0);
     const [pointsHistory, setPointsHistory] = useState([]);
 
@@ -35,7 +34,6 @@ const GamePage = () => {
                     data={data}
                     distanceBetween={distanceBetween}
                     setDistanceBetween={setDistanceBetween}
-                    currentRound={currentRound}
                     setView={setView}
                     points={points}
                     setPoints={setPoints}
@@ -47,9 +45,7 @@ const GamePage = () => {
                     dataLength={data.length}
                     distanceBetween={distanceBetween}
                     setView={setView}
-                    currentRound={currentRound}
                     points={points}
-                    setCurrentRound={setCurrentRound}
                     pointsHistory={pointsHistory}
                 />
             )}

@@ -3,8 +3,8 @@ import { SummaryItem } from '../../components/SummaryItem/SummaryItem';
 import { useGameCtx } from '../../contexts/GameContext';
 import { Button, SummaryWrapper, Wrapper } from './RoundSummary.styles';
 
-const RoundSummary = ({ distanceBetween, setView, setCurrentRound, dataLength, currentRound, points, pointsHistory }) => {
-    const { aiData } = useGameCtx();
+const RoundSummary = ({ distanceBetween, setView, dataLength, points, pointsHistory }) => {
+    const { aiData, currentRound, setCurrentRound } = useGameCtx();
 
     const handleNextRound = () => {
         if (currentRound + 1 == dataLength) {

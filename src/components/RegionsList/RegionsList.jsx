@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useGameCtx } from '../../contexts/GameContext';
+import React from 'react';
+import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import Region from '../Region/Region';
 import { Wrapper } from './RegionsList.styled';
 
 const RegionsList = () => {
-    const { selectedRegion, setSelectedRegion } = useGameCtx();
+    const { selectedRegion, setSelectedRegion } = useGameConfigCtx();
     const regions = ['Polska', 'Francja', 'Niemcy', 'Hiszpania', 'Włochy'];
 
     return (

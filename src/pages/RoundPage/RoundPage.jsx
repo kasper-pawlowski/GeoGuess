@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ImageWrapper, Ranking, RankingItem, UserRankingItem, RightContainer, Wrapper } from './RoundPage.styles';
 import Map from '../../components/Map/Map';
+import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
 import Timer from '../../components/Timer/Timer';
 import { Navigate } from 'react-router-dom';
@@ -10,8 +11,10 @@ import { useUserAuth } from '../../contexts/AuthContext';
 import useAiFunctions from '../../hooks/useAiFunctions';
 import Image from '../../components/Image/Image';
 
-const RoundPage = ({ data, distanceBetween, setDistanceBetween, currentRound, setView, setPoints, points, setPointsHistory }) => {
-    const { roundTime, selectedRegion, aiData } = useGameCtx();
+const RoundPage = ({ data, distanceBetween, setDistanceBetween, setView, setPoints, points, setPointsHistory }) => {
+    const { roundTime, selectedRegion } = useGameConfigCtx();
+    const { currentRound } = useGameCtx();
+    const { aiData } = useGameCtx();
     const [loading, isLoading] = useState(true);
     const [secondsLeft, setSecondsLeft] = useState(roundTime);
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });

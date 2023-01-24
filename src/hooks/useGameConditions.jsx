@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGameCtx } from '../contexts/GameContext';
+import { useGameConfigCtx } from '../contexts/GameConfigContext';
 
 const useGameConditions = () => {
     const navigate = useNavigate();
-    const { selectedRegion, rounds, roundTime } = useGameCtx();
+    const { selectedRegion, rounds, roundTime } = useGameConfigCtx();
     const [errors, setErrors] = useState([]);
     const [regionError, setRegionError] = useState(null);
 

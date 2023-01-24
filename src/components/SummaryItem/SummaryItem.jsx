@@ -1,11 +1,13 @@
 import React from 'react';
 import { useMediaQuery } from 'react-responsive';
 import { useUserAuth } from '../../contexts/AuthContext';
+import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
 import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer, Points } from './SummaryItem.styles';
 
-export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, currentRound, aiData }) => {
+export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, aiData }) => {
     const { user } = useUserAuth();
+    const { currentRound } = useGameCtx();
     const isMobile = useMediaQuery({ query: '(max-width: 910px)' });
 
     const returnUserPoints = () => {
@@ -66,7 +68,7 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, cur
 };
 
 export const GameSummaryItem = ({ points, isUserSummary, aiData }) => {
-    const { rounds } = useGameCtx();
+    const { rounds } = useGameConfigCtx();
     const { user } = useUserAuth();
     const isMobile = useMediaQuery({ query: '(max-width: 910px)' });
 

@@ -1,11 +1,12 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const gameContext = createContext();
 
 export function GameContextProvider({ children }) {
-    const [rounds, setRounds] = useState(5);
-    const [roundTime, setRoundTime] = useState(60);
-    const [selectedRegion, setSelectedRegion] = useState('');
+    const [currentRound, setCurrentRound] = useState(0);
+    const [distanceBetween, setDistanceBetween] = useState(null);
+    const [points, setPoints] = useState(0);
+    const [pointsHistory, setPointsHistory] = useState([]);
     const [aiData, setAiData] = useState([
         {
             name: 'Maciej',
@@ -27,11 +28,7 @@ export function GameContextProvider({ children }) {
         },
     ]);
 
-    return (
-        <gameContext.Provider value={{ rounds, setRounds, roundTime, setRoundTime, selectedRegion, setSelectedRegion, aiData, setAiData }}>
-            {children}
-        </gameContext.Provider>
-    );
+    return <gameContext.Provider value={{ aiData, setAiData, currentRound, setCurrentRound }}>{children}</gameContext.Provider>;
 }
 
 export function useGameCtx() {

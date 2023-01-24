@@ -9,6 +9,7 @@ import { GlobalStyle } from './styles/GlobalStyle';
 import { theme } from './styles/theme';
 import { ThemeProvider } from 'styled-components';
 import { GameContextProvider } from './contexts/GameContext';
+import { GameConfigContextProvider } from './contexts/GameConfigContext';
 import Skyscrapers from './components/Skyscrapers';
 import Layout, { LayoutContent } from './components/Layout';
 import GamePage from './pages/GamePage/GamePage';
@@ -33,38 +34,40 @@ const Root = () => {
 
     return (
         <UserAuthContextProvider>
-            <GameContextProvider>
-                <GlobalStyle />
-                <ThemeProvider theme={theme}>
-                    <Layout>
-                        <Navbar />
-                        <LayoutContent>
-                            <Routes>
-                                <Route
-                                    path="/"
-                                    element={
-                                        <ProtectedRoute>
-                                            <GameSetupPage />
-                                        </ProtectedRoute>
-                                    }
-                                />
-                                <Route path="/login" element={<LoginPage />} />
-                                <Route
-                                    path="/game"
-                                    element={
-                                        <ProtectedRoute>
-                                            <GamePage />
-                                        </ProtectedRoute>
-                                    }
-                                />
-                                <Route path="/404" element={<NotFound />} />
-                                <Route path="*" element={<Navigate to="/404" replace />} />
-                            </Routes>
-                        </LayoutContent>
-                    </Layout>
-                    <Skyscrapers />
-                </ThemeProvider>
-            </GameContextProvider>
+            <GameConfigContextProvider>
+                <GameContextProvider>
+                    <GlobalStyle />
+                    <ThemeProvider theme={theme}>
+                        <Layout>
+                            <Navbar />
+                            <LayoutContent>
+                                <Routes>
+                                    <Route
+                                        path="/"
+                                        element={
+                                            <ProtectedRoute>
+                                                <GameSetupPage />
+                                            </ProtectedRoute>
+                                        }
+                                    />
+                                    <Route path="/login" element={<LoginPage />} />
+                                    <Route
+                                        path="/game"
+                                        element={
+                                            <ProtectedRoute>
+                                                <GamePage />
+                                            </ProtectedRoute>
+                                        }
+                                    />
+                                    <Route path="/404" element={<NotFound />} />
+                                    <Route path="*" element={<Navigate to="/404" replace />} />
+                                </Routes>
+                            </LayoutContent>
+                        </Layout>
+                        <Skyscrapers />
+                    </ThemeProvider>
+                </GameContextProvider>
+            </GameConfigContextProvider>
         </UserAuthContextProvider>
     );
 };
