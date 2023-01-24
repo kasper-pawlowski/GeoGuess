@@ -6,7 +6,7 @@ import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer, Points
 
 export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, currentRound, aiData }) => {
     const { user } = useUserAuth();
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 910px)' });
 
     const returnUserPoints = () => {
         if (distanceBetween) {
@@ -44,7 +44,7 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, cur
             </div>
             <RangeWrapper>
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : aiData?.distance} />
-                <p>{isUserSummary ? (distanceBetween ? distanceBetween : 'X') : aiData?.distance} m</p>
+                <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : aiData?.distance} m</p>
             </RangeWrapper>
         </Wrapper>
     ) : (
@@ -53,7 +53,7 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, cur
             <Spacer />
             <RangeWrapper>
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : aiData?.distance} />
-                <p>{isUserSummary ? (distanceBetween ? distanceBetween : 'X') : aiData?.distance} m</p>
+                <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : aiData?.distance} m</p>
             </RangeWrapper>
             <Spacer />
             <Points>
@@ -68,7 +68,7 @@ export const SummaryItem = ({ isUserSummary, distanceBetween, pointsHistory, cur
 export const GameSummaryItem = ({ points, isUserSummary, aiData }) => {
     const { rounds } = useGameCtx();
     const { user } = useUserAuth();
-    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+    const isMobile = useMediaQuery({ query: '(max-width: 910px)' });
 
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>

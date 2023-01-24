@@ -39,7 +39,7 @@ export const SummaryWrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
-    @media (max-width: 768px) {
+    @media (max-width: 910px) {
         width: 100%;
     }
 `;

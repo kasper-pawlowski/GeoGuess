@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
     border: 1px solid ${({ isUserSummary, theme }) => (isUserSummary ? theme.colors.accent : '#f4f4f4')};
     border-radius: 7px;
     font-size: 1.1rem;
-    @media (max-width: 768px) {
+    @media (max-width: 910px) {
         font-size: 0.8rem;
         gap: 15px;
         flex-direction: column;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
             display: flex;
             justify-content: space-between;
 
-            @media (max-width: 768px) {
+            @media (max-width: 910px) {
                 font-size: 0.9rem;
             }
         }
@@ -32,7 +32,7 @@ export const Spacer = styled.div`
     width: 1px;
     height: 100%;
     background-color: black;
-    @media (max-width: 768px) {
+    @media (max-width: 910px) {
         display: none;
     }
 `;
@@ -43,11 +43,21 @@ export const RangeWrapper = styled.div`
     align-items: center;
     gap: 30px;
 
-    @media (min-width: 768px) {
+    @media (min-width: 910px) {
         width: 400px;
     }
     @media (max-width: 910px) {
         flex: 1;
+    }
+
+    p {
+        width: 60px;
+        display: flex;
+        justify-content: flex-end;
+
+        @media (max-width: 910px) {
+            width: 50px;
+        }
     }
 `;
 

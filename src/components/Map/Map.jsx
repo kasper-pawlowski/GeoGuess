@@ -3,8 +3,8 @@ import { Wrapper } from './Map.styled';
 import { MapContainer, TileLayer, Marker, useMapEvents, Polyline } from 'react-leaflet';
 import { calculateDistance } from '../../helpers/calculateDistance';
 import { getApproximateCoords } from '../../helpers/getApproximateCoords';
-import useAiFunctions from '../../hooks/useAiFunctions';
 import { theme } from '../../styles/theme';
+import L from 'leaflet';
 
 const Map = ({ coordinates, setDistanceBetween, handleNextRound, secondsLeft }) => {
     const [markerCoords, setMarkerCoords] = useState(null);
@@ -30,11 +30,14 @@ const Map = ({ coordinates, setDistanceBetween, handleNextRound, secondsLeft }) 
         }
     }, [markerCoords]);
 
-    // useEffect(() => {
-    //     if (clicked || secondsLeft === 0) {
-
-    //     }
-    // }, [secondsLeft, clicked]);
+    var blueIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+    });
 
     useEffect(() => {
         if (markerCoords) {
@@ -64,7 +67,7 @@ const Map = ({ coordinates, setDistanceBetween, handleNextRound, secondsLeft }) 
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     <UserMarker />
-                    {markerCoords && <Marker position={targetPosition} />}
+                    {markerCoords && <Marker icon={blueIcon} position={targetPosition} />}
                     {markerCoords && (
                         <Polyline
                             pathOptions={colorOptions}
