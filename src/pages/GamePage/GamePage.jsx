@@ -5,12 +5,13 @@ import GameSummary from '../GameSummary/GameSummary';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const GamePage = () => {
     const { rounds, selectedRegion } = useGameConfigCtx();
     const [view, setView] = useState('round');
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -22,10 +23,13 @@ const GamePage = () => {
             const shuffledData = array.sort(() => Math.random() - 0.5);
             setData(shuffledData.slice(0, rounds));
         };
-        fetchData();
+        if (selectedRegion === '') {
+            navigate('/');
+        } else {
+            fetchData();
+        }
     }, []);
 
-    if (selectedRegion === '') return <Navigate to="/" replace />;
     return (
         <>
             {view === 'round' && <RoundPage data={data} setView={setView} />}
