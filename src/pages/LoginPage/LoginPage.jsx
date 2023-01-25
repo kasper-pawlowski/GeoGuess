@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../services/firebase';
 import { useNavigate } from 'react-router-dom';
 import { Button, ErrorMessage, Wrapper } from './LoginPage.styles';

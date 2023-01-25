@@ -6,7 +6,7 @@ import { Button, SummaryWrapper, Wrapper } from './GameSummary.styles';
 
 const GameSummary = () => {
     const navigate = useNavigate();
-    const { rounds, aiData } = useGameCtx();
+    const { aiData } = useGameCtx();
 
     const handleEndGame = () => {
         navigate(`/`);
@@ -15,7 +15,6 @@ const GameSummary = () => {
     return (
         <Wrapper>
             <h1>Gra zakończona!</h1>
-            {/* <h3>Maksymalna liczba punktów do zdobycia wynosi {rounds * 5000}</h3> */}
             <SummaryWrapper>
                 <>
                     <GameSummaryItem isUserSummary={true} />

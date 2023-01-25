@@ -5,7 +5,7 @@ import GameSummary from '../GameSummary/GameSummary';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../services/firebase';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext';
-import { useGameCtx } from '../../contexts/GameContext';
+import { Navigate } from 'react-router-dom';
 
 const GamePage = () => {
     const { rounds, selectedRegion } = useGameConfigCtx();
@@ -25,6 +25,7 @@ const GamePage = () => {
         fetchData();
     }, []);
 
+    if (selectedRegion === '') return <Navigate to="/" replace />;
     return (
         <>
             {view === 'round' && <RoundPage data={data} setView={setView} />}

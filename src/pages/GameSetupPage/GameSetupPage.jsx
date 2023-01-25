@@ -32,11 +32,18 @@ const GameSetupPage = () => {
                 <h1>Zmień ustawienia gry</h1>
                 <SettingWrapper>
                     <p>Liczba rund:</p>
-                    <Input type="number" name="rounds" value={rounds} min={1} max={5} onChange={(e) => setRounds(e.target.value)} />
+                    <Input type="number" name="rounds" value={rounds} min={1} max={5} onChange={(e) => setRounds(Number(e.target.value))} />
                 </SettingWrapper>
                 <SettingWrapper>
                     <p>Czas rundy(s):</p>
-                    <Input type="number" name="roundTime" value={roundTime} min={10} max={60} onChange={(e) => setRoundTime(e.target.value)} />
+                    <Input
+                        type="number"
+                        name="roundTime"
+                        value={roundTime}
+                        min={10}
+                        max={60}
+                        onChange={(e) => setRoundTime(Number(e.target.value))}
+                    />
                 </SettingWrapper>
                 <Button onClick={handleStartGame}>Rozpocznij</Button>
                 {errors.length > 0 && (

@@ -18,8 +18,9 @@ const Map = ({ coordinates, handleNextRound }) => {
     const UserMarker = () => {
         useMapEvents({
             click: (e) => {
-                clicked === false && setMarkerCoords([e.latlng.lat, e.latlng.lng]);
-                setDistanceBetween(calculateDistance(targetPosition[0], targetPosition[1], e.latlng.lat, e.latlng.lng));
+                clicked === false &&
+                    (setMarkerCoords([e.latlng.lat, e.latlng.lng]),
+                    setDistanceBetween(calculateDistance(targetPosition[0], targetPosition[1], e.latlng.lat, e.latlng.lng)));
             },
         });
 
