@@ -16,7 +16,7 @@ const LoginPage = () => {
             })
             .catch((error) => {
                 const errorMessage = error.message;
-                setError(errorMessage);
+                setError('Nie udało się zalogować');
                 console.log(errorMessage);
             });
     };

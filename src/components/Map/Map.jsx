@@ -59,7 +59,7 @@ const Map = ({ coordinates, handleNextRound }) => {
         coordinates && (
             <Wrapper>
                 <MapContainer
-                    dragging={false}
+                    dragging={true}
                     zoomControl={false}
                     doubleClickZoom={false}
                     center={getApproximateCoords(targetPosition[0], targetPosition[1])}
