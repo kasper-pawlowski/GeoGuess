@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, InfoSection, InfoWrapper, Wrapper } from './InfoPage.styles';
 
 const InfoPage = () => {
@@ -9,32 +10,28 @@ const InfoPage = () => {
                 <InfoSection>
                     <h2>Lorem, ipsum.</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, perspiciatis aliquid laudantium repudiandae nihil
-                        deleniti quasi molestiae iusto et ipsa, nemo nam vero mollitia maxime ad eius facilis totam soluta natus, eligendi accusamus
-                        quia! Ab officiis cum accusamus culpa. Sed sapiente earum officiis necessitatibus reiciendis expedita aliquid unde, eius
-                        assumenda!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quo laudantium magnam ipsam nostrum dolorum, at porro similique
+                        in delectus harum eos necessitatibus veniam quis laboriosam quos labore commodi? Maxime?
                     </p>
                 </InfoSection>
                 <InfoSection>
                     <h2>Lorem, ipsum.</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, perspiciatis aliquid laudantium repudiandae nihil
-                        deleniti quasi molestiae iusto et ipsa, nemo nam vero mollitia maxime ad eius facilis totam soluta natus, eligendi accusamus
-                        quia! Ab officiis cum accusamus culpa. Sed sapiente earum officiis necessitatibus reiciendis expedita aliquid unde, eius
-                        assumenda!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quo laudantium magnam ipsam nostrum dolorum, at porro similique
+                        in delectus harum eos necessitatibus veniam quis laboriosam quos labore commodi? Maxime?
                     </p>
                 </InfoSection>
                 <InfoSection>
                     <h2>Lorem, ipsum.</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, perspiciatis aliquid laudantium repudiandae nihil
-                        deleniti quasi molestiae iusto et ipsa, nemo nam vero mollitia maxime ad eius facilis totam soluta natus, eligendi accusamus
-                        quia! Ab officiis cum accusamus culpa. Sed sapiente earum officiis necessitatibus reiciendis expedita aliquid unde, eius
-                        assumenda!
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil quo laudantium magnam ipsam nostrum dolorum, at porro similique
+                        in delectus harum eos necessitatibus veniam quis laboriosam quos labore commodi? Maxime?
                     </p>
                 </InfoSection>
             </InfoWrapper>
-            <Button>Powrót</Button>
+            <Button as={Link} to="/">
+                Powrót
+            </Button>
         </Wrapper>
     );
 };

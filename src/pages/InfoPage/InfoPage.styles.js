@@ -10,15 +10,21 @@ export const Wrapper = styled.div`
 
     @media (max-width: 768px) {
         padding-bottom: 30%;
+        gap: 50px;
     }
 `;
 
 export const InfoWrapper = styled.div`
     background-color: #000;
+    width: 80%;
     display: flex;
     gap: 2px;
+    @media (max-width: 1200px) {
+        width: 90%;
+    }
     @media (max-width: 910px) {
         flex-direction: column;
+        width: 100%;
     }
 `;
 
@@ -34,7 +40,7 @@ export const InfoSection = styled.div`
     }
 `;
 
-export const Button = styled.button`
+export const Button = styled.a`
     display: flex;
     justify-content: center;
     align-items: center;
