@@ -7,8 +7,7 @@ export const Wrapper = styled.div`
     top: 0;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 20px;
+    justify-content: space-between;
     border-bottom: 2px solid black;
     background: #ffffff;
     z-index: 999;
@@ -21,8 +20,28 @@ export const Wrapper = styled.div`
     }
 `;
 
+export const InfoLink = styled.a`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+`;
+
+export const Container = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+`;
+
 export const DisplayName = styled.p`
     font-size: 20;
+`;
+
+export const Avatar = styled.img`
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
 `;
 
 export const LogOutButton = styled.div`

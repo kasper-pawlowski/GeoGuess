@@ -1,7 +1,9 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useUserAuth } from '../../contexts/AuthContext';
-import { DisplayName, LogOutButton, Wrapper } from './Navbar.styles.js';
+import { Avatar, DisplayName, LogOutButton, Wrapper, Container, InfoLink } from './Navbar.styles.js';
+import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { BiHome } from 'react-icons/bi';
 
 const Navbar = () => {
     let location = useLocation();
@@ -11,8 +13,20 @@ const Navbar = () => {
     if (!user) return;
     return pathname !== '/login' ? (
         <Wrapper>
-            <DisplayName>{user.displayName}</DisplayName>
-            <LogOutButton onClick={logOut}>Wyloguj</LogOutButton>
+            {pathname === '/info' ? (
+                <InfoLink as={Link} to="/">
+                    <BiHome />
+                </InfoLink>
+            ) : (
+                <InfoLink as={Link} to="/info">
+                    <AiOutlineInfoCircle />
+                </InfoLink>
+            )}
+            <Container>
+                <DisplayName>{user.displayName}</DisplayName>
+                <Avatar src={user?.photoURL} alt="" />
+                <LogOutButton onClick={logOut}>Wyloguj</LogOutButton>
+            </Container>
         </Wrapper>
     ) : (
         <Wrapper>login</Wrapper>

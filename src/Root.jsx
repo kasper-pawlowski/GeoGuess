@@ -17,6 +17,7 @@ import NotFound from './pages/NotFound/NotFound';
 import { useEffect } from 'react';
 import { auth } from './services/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
+import InfoPage from './pages/InfoPage/InfoPage';
 
 const Root = () => {
     const navigate = useNavigate();
@@ -59,6 +60,7 @@ const Root = () => {
                                             </ProtectedRoute>
                                         }
                                     />
+                                    <Route path="/info" element={<InfoPage />} />
                                     <Route path="/404" element={<NotFound />} />
                                     <Route path="*" element={<Navigate to="/404" replace />} />
                                 </Routes>

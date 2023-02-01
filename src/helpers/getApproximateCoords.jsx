@@ -1,12 +1,11 @@
-export const getApproximateCoords = (lat, lon) => {
-    const latVariance = Math.random() * 0.009 + 0.001;
-    const lonVariance = Math.random() * 0.009 + 0.001;
+export const getApproximateCoords = (lat, lng) => {
+    const latVariance = (Math.random() * 2000 - 1000) / 1000;
+    const lngVariance = (Math.random() * 2000 - 1000) / 1000;
 
-    const latSign = Math.random() < 0.5 ? -1 : 1;
-    const lonSign = Math.random() < 0.5 ? -1 : 1;
+    const approximateLat = lat + latVariance;
+    const approximateLng = lng + lngVariance;
 
-    const approximateLat = lat + latVariance * latSign;
-    const approximateLon = lon + lonVariance * lonSign;
-
-    return [approximateLat, approximateLon];
+    return [approximateLat, approximateLng];
 };
+
+// na podstawie koordynatów funkcja zwraca koordynaty różniące się od faktycznych od 1m do 2000m

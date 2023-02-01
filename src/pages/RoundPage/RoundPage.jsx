@@ -43,7 +43,7 @@ const RoundPage = ({ data, setView }) => {
     };
 
     const updateAiData = async () => {
-        const newDistanceHistory = await aiData.map((e) => {
+        const newData = await aiData.map((e) => {
             const newDistance = Math.round(Math.random() * 4999 + 1);
             return {
                 ...e,
@@ -52,7 +52,7 @@ const RoundPage = ({ data, setView }) => {
                 pointsHistory: e.pointsHistory.concat(e.points),
             };
         });
-        setAiData(newDistanceHistory);
+        setAiData(newData);
     };
 
     if (!selectedRegion) return <Navigate to="/" />;
