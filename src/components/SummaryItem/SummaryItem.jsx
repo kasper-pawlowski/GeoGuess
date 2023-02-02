@@ -10,38 +10,20 @@ export const SummaryItem = ({ isUserSummary, data }) => {
     const { currentRound, pointsHistory, distanceBetween } = useGameCtx();
     const isMobile = useMediaQuery({ query: '(max-width: 910px)' });
 
-    const returnUserPoints = () => {
-        if (distanceBetween) {
-            if (distanceBetween >= 5000) {
-                return 0;
-            } else {
-                return 5000 - distanceBetween;
-            }
-        } else {
-            return 0;
-        }
+    const calculatePoints = (distance) => {
+        if (!distance) return 0;
+        return distance >= 5000 ? 0 : 5000 - distance;
     };
 
-    const returnAiPoints = () => {
-        if (data?.distance) {
-            if (data.distance >= 5000) {
-                return 0;
-            } else {
-                return 5000 - data.distance;
-            }
-        } else {
-            return 0;
-        }
-    };
+    const userPoints = calculatePoints(distanceBetween);
+    const aiPoints = calculatePoints(data?.distance);
 
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
             <div>
                 <Name>{isUserSummary ? user.displayName : data?.name}</Name>
                 <Points>
-                    {isUserSummary
-                        ? `${pointsHistory[currentRound]} + ${returnUserPoints()} pkt`
-                        : `${data?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
+                    {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
                 </Points>
             </div>
             <RangeWrapper>
@@ -59,9 +41,7 @@ export const SummaryItem = ({ isUserSummary, data }) => {
             </RangeWrapper>
             <Spacer />
             <Points>
-                {isUserSummary
-                    ? `${pointsHistory[currentRound]} + ${returnUserPoints()} pkt`
-                    : `${data?.pointsHistory[currentRound]} + ${returnAiPoints()} pkt`}
+                {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
             </Points>
         </Wrapper>
     );

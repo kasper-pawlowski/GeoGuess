@@ -32,6 +32,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     gap: 20px;
+    justify-self: flex-end;
 `;
 
 export const DisplayName = styled.p`

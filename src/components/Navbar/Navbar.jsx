@@ -13,18 +13,18 @@ const Navbar = () => {
     if (!user) return;
     return pathname !== '/login' ? (
         <Wrapper>
-            {pathname === '/info' ? (
-                <InfoLink as={Link} to="/">
-                    <BiHome />
-                </InfoLink>
-            ) : (
+            {pathname === '/' ? (
                 <InfoLink as={Link} to="/info">
                     <AiOutlineInfoCircle />
+                </InfoLink>
+            ) : (
+                <InfoLink as={Link} to="/">
+                    <BiHome />
                 </InfoLink>
             )}
             <Container>
                 <DisplayName>{user.displayName}</DisplayName>
-                <Avatar src={user?.photoURL} alt="" />
+                <Avatar referrerPolicy="no-referrer" src={user?.photoURL} alt="" />
                 <LogOutButton onClick={logOut}>Wyloguj</LogOutButton>
             </Container>
         </Wrapper>
