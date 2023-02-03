@@ -9,6 +9,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
+    // funkcja logowania poprzez google
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
             .then(() => {

@@ -4,6 +4,7 @@ import { StyledIcon, StyledSpan, Wrapper } from './Timer.styles';
 const Timer = ({ handleTimeIsUp, secondsLeft, setSecondsLeft }) => {
     let intervalId = null;
 
+    // obsługa timera
     useEffect(() => {
         if (secondsLeft > 0) {
             intervalId = setInterval(() => {

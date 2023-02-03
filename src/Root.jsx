@@ -22,6 +22,7 @@ import InfoPage from './pages/InfoPage/InfoPage';
 const Root = () => {
     const navigate = useNavigate();
 
+    // słuchanie zmian w logowaniu
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
             if (!currentuser) {

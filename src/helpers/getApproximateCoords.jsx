@@ -10,3 +10,5 @@ export const getApproximateCoords = (lat, lng) => {
 
     return [approximateLat, approximateLng];
 };
+
+// na podstawie koordynatów zwracane są koordynaty różniące się w losowo w zakresie od 11m do 2,15km

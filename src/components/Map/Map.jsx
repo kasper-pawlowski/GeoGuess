@@ -9,29 +9,29 @@ import { useGameCtx } from '../../contexts/GameContext';
 
 const Map = ({ coordinates, handleNextRound }) => {
     const { setDistanceBetween } = useGameCtx();
-    const [markerCoords, setMarkerCoords] = useState(null);
+    const [selectedCoords, setSelectedCoords] = useState(null); // współrzędne miejsca w którym user kliknął
     const [clicked, isClicked] = useState(false);
     let timeoutId = null;
 
-    const targetPosition = [coordinates?.lat, coordinates?.lng];
+    const targetPosition = [coordinates?.lat, coordinates?.lng]; // współrzędne budynku
 
     const UserMarker = () => {
         useMapEvents({
             click: (e) => {
                 clicked === false &&
-                    (setMarkerCoords([e.latlng.lat, e.latlng.lng]),
+                    (setSelectedCoords([e.latlng.lat, e.latlng.lng]),
                     setDistanceBetween(calculateDistance(targetPosition[0], targetPosition[1], e.latlng.lat, e.latlng.lng)));
             },
         });
 
-        return markerCoords ? <Marker className="userMarker" position={markerCoords} /> : null;
-    };
+        return selectedCoords ? <Marker className="userMarker" position={selectedCoords} /> : null;
+    }; // ustawianie markeru w miejscu kliknecia przez event z mapy leaflet
 
     useEffect(() => {
-        if (markerCoords) {
+        if (selectedCoords) {
             isClicked(true);
         }
-    }, [markerCoords]);
+    }, [selectedCoords]);
 
     let blueIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
@@ -40,10 +40,10 @@ const Map = ({ coordinates, handleNextRound }) => {
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
-    });
+    }); // pobieranie ikony markeru
 
     useEffect(() => {
-        if (markerCoords) {
+        if (selectedCoords) {
             timeoutId = setTimeout(() => {
                 handleNextRound();
             }, 1000);
@@ -51,7 +51,7 @@ const Map = ({ coordinates, handleNextRound }) => {
         return () => {
             clearTimeout(timeoutId);
         };
-    }, [markerCoords]);
+    }, [selectedCoords]); // jesli kliknięto w mape to po sekundzie wykonuje sie funkcja która obsluguje następną runde
 
     const colorOptions = { color: theme.colors.accent };
 
@@ -70,13 +70,13 @@ const Map = ({ coordinates, handleNextRound }) => {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                     <UserMarker />
-                    {markerCoords && <Marker icon={blueIcon} position={targetPosition} />}
-                    {markerCoords && (
+                    {selectedCoords && <Marker icon={blueIcon} position={targetPosition} />}
+                    {selectedCoords && (
                         <Polyline
                             pathOptions={colorOptions}
                             positions={[
                                 [targetPosition[0], targetPosition[1]],
-                                [markerCoords[0], markerCoords[1]],
+                                [selectedCoords[0], selectedCoords[1]],
                             ]}
                         />
                     )}

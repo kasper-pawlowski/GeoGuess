@@ -5,6 +5,7 @@ import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
 import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer, Points } from './SummaryItem.styles';
 
+// SummaryItem pomiędzy rundami oddzielny layout dla mobile i desktop
 export const SummaryItem = ({ isUserSummary, data }) => {
     const { user } = useUserAuth();
     const { currentRound, pointsHistory, distanceBetween } = useGameCtx();
@@ -47,6 +48,7 @@ export const SummaryItem = ({ isUserSummary, data }) => {
     );
 };
 
+// SummaryItem dla summary po grze oddzielny layout dla mobile i desktop
 export const GameSummaryItem = ({ isUserSummary, data }) => {
     const { rounds } = useGameConfigCtx();
     const { points } = useGameCtx();

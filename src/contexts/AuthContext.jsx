@@ -4,6 +4,8 @@ import { auth } from '../services/firebase';
 
 const userAuthContext = createContext();
 
+// context który zwraca obiekt danych usera
+
 export function UserAuthContextProvider({ children }) {
     const [user, setUser] = useState({});
 
@@ -19,7 +21,7 @@ export function UserAuthContextProvider({ children }) {
         return () => {
             unsubscribe();
         };
-    }, []);
+    }, [auth]);
 
     return <userAuthContext.Provider value={{ user, logOut }}>{children}</userAuthContext.Provider>;
 }

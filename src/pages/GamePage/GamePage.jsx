@@ -13,6 +13,7 @@ const GamePage = () => {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
 
+    // pobieranie z firebase danych na podstawie ustawien, ustawianie ich w losowej kolejnosci, dodanie danych do zmiennej data w ilosci takiej jaka jest wybrana ilosc rund
     useEffect(() => {
         const fetchData = async () => {
             const querySnapshot = await getDocs(collection(db, selectedRegion.toLowerCase()));

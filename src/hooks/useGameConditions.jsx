@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useGameConfigCtx } from '../contexts/GameConfigContext';
 
+// obsluga błędów w GameSetupPage
+
 const useGameConditions = () => {
     const navigate = useNavigate();
     const { selectedRegion, rounds, roundTime } = useGameConfigCtx();
