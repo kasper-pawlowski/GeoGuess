@@ -2,23 +2,40 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     display: flex;
-    gap: 30px;
-    padding: 12px 20px;
-    background-color: #f4f4f4;
-    border: 1px solid ${({ isUserSummary, theme }) => (isUserSummary ? theme.colors.accent : '#f4f4f4')};
-    border-radius: 7px;
-    font-size: 1.1rem;
-    @media (max-width: 910px) {
-        font-size: 0.8rem;
-        gap: 15px;
+    gap: ${({ theme }) => theme.spacing.md};
+    padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+    background: ${({ isUserSummary, theme }) => (isUserSummary ? theme.colors.accent : theme.colors.surface)};
+    color: ${({ isUserSummary, theme }) => (isUserSummary ? theme.colors.surface : theme.colors.text)};
+    border: 4px solid ${({ theme }) => theme.colors.border};
+    border-radius: 0;
+    font-size: ${({ theme }) => theme.typography.fontSize.md};
+    font-weight: ${({ theme }) => theme.typography.fontWeight.semibold};
+    box-shadow: 4px 4px 0px ${({ theme }) => theme.colors.shadow};
+    transition: all 0.2s ease;
+    align-items: center;
+    min-height: 60px;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 6px 6px 0px ${({ theme }) => theme.colors.shadow};
+    }
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+        font-size: ${({ theme }) => theme.typography.fontSize.sm};
+        gap: ${({ theme }) => theme.spacing.sm};
         flex-direction: column;
+        padding: ${({ theme }) => theme.spacing.sm};
+        align-items: stretch;
+        min-height: 50px;
 
         div:nth-child(1) {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            gap: ${({ theme }) => theme.spacing.sm};
 
-            @media (max-width: 910px) {
-                font-size: 0.9rem;
+            @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+                font-size: ${({ theme }) => theme.typography.fontSize.sm};
             }
         }
     }
@@ -26,13 +43,25 @@ export const Wrapper = styled.div`
 
 export const Name = styled.div`
     width: 120px;
+    font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing.sm};
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+        width: auto;
+        flex: 1;
+    }
 `;
 
 export const Spacer = styled.div`
-    width: 1px;
+    width: 4px;
     height: 100%;
-    background-color: black;
-    @media (max-width: 910px) {
+    background: ${({ theme }) => theme.colors.border};
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
         display: none;
     }
 `;
@@ -41,48 +70,67 @@ export const RangeWrapper = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: ${({ theme }) => theme.spacing.xl};
 
-    @media (min-width: 910px) {
-        width: 400px;
+    @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
+        width: 420px;
     }
-    @media (max-width: 910px) {
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
         flex: 1;
     }
 
     p {
-        width: 60px;
+        width: 70px;
         display: flex;
         justify-content: flex-end;
+        font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+        background: ${({ theme }) => theme.colors.warning};
+        color: ${({ theme }) => theme.colors.text};
+        padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+        border: 2px solid ${({ theme }) => theme.colors.border};
 
-        @media (max-width: 910px) {
-            width: 50px;
+        @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+            width: 60px;
+            padding: ${({ theme }) => theme.spacing.xs};
         }
     }
 `;
 
 export const RangeTrack = styled.div`
-    height: 1px;
+    height: 6px;
     flex: 1;
-    background-color: black;
+    background: ${({ theme }) => theme.colors.border};
     position: relative;
+    border: 2px solid ${({ theme }) => theme.colors.border};
+
     &::after {
         content: '';
         position: absolute;
-        height: 10px;
+        height: 100%;
         width: ${({ distanceBetween }) => (distanceBetween ? 100 - (distanceBetween / 5000) * 100 : 0)}%;
-
-        background-color: ${({ theme }) => theme.colors.accent};
-        top: 50%;
-        translate: 0 -50%;
+        background: linear-gradient(
+            90deg,
+            ${({ theme }) => theme.colors.success} 0%,
+            ${({ theme }) => theme.colors.warning} 50%,
+            ${({ theme }) => theme.colors.error} 100%
+        );
+        top: 0;
         left: 0;
-        border-radius: 100vw;
+        border-radius: 0;
+        transition: width 0.5s ease;
     }
 `;
 
 export const GameRangeTrack = styled(RangeTrack)`
     &::after {
         width: ${({ points, rounds }) => (points / (rounds * 5000)) * 100}%;
+        background: linear-gradient(
+            90deg,
+            ${({ theme }) => theme.colors.error} 0%,
+            ${({ theme }) => theme.colors.warning} 50%,
+            ${({ theme }) => theme.colors.success} 100%
+        );
     }
 `;
 
@@ -90,4 +138,50 @@ export const Points = styled.p`
     display: flex;
     align-items: center;
     margin-left: auto;
+    background: ${({ theme }) => theme.colors.success} !important;
+    color: ${({ theme }) => theme.colors.surface} !important;
+    font-weight: ${({ theme }) => theme.typography.fontWeight.bold} !important;
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md} !important;
+    border: 3px solid ${({ theme }) => theme.colors.border} !important;
+    box-shadow: 2px 2px 0px ${({ theme }) => theme.colors.shadow};
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+`;
+
+export const PlayerIcon = styled.div`
+    width: 36px;
+    height: 36px;
+    background: ${({ theme }) => theme.colors.success};
+    border: 3px solid ${({ theme }) => theme.colors.border};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${({ theme }) => theme.colors.surface};
+    font-size: 1.1rem;
+    flex-shrink: 0;
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+`;
+
+export const BotIcon = styled.div`
+    width: 36px;
+    height: 36px;
+    background: ${({ theme }) => theme.colors.warning};
+    border: 3px solid ${({ theme }) => theme.colors.border};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 1.1rem;
+    flex-shrink: 0;
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
 `;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ImageWrapper, Ranking, RankingItem, UserRankingItem, RightContainer, Wrapper } from './RoundPage.styles';
+import { ImageWrapper, Ranking, RankingItem, UserRankingItem, RightContainer, Wrapper, PlayerIcon, BotIcon } from './RoundPage.styles';
 import Map from '../../components/Map/Map';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
@@ -9,6 +9,7 @@ import { useMediaQuery } from 'react-responsive';
 import Spinner from '../../components/Spinner';
 import { useUserAuth } from '../../contexts/AuthContext';
 import Image from '../../components/Image/Image';
+import { FaUser, FaRobot } from 'react-icons/fa';
 
 const RoundPage = ({ data, setView }) => {
     const { roundTime, selectedRegion } = useGameConfigCtx();
@@ -77,11 +78,17 @@ const RoundPage = ({ data, setView }) => {
                 <RightContainer>
                     <Ranking>
                         <UserRankingItem>
+                            <PlayerIcon>
+                                <FaUser />
+                            </PlayerIcon>
                             <p>{user.displayName}</p>
                             <span>{points}</span>
                         </UserRankingItem>
                         {aiData.map((e) => (
                             <RankingItem key={e.name}>
+                                <BotIcon>
+                                    <FaRobot />
+                                </BotIcon>
                                 <p>{e.name}</p>
                                 <span>{e.points}</span>
                             </RankingItem>

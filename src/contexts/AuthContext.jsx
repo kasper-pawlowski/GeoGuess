@@ -1,27 +1,20 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../services/firebase';
+import { createContext, useContext, useState } from 'react';
 
 const userAuthContext = createContext();
 
 // context który zwraca obiekt danych usera
 
 export function UserAuthContextProvider({ children }) {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({
+        displayName: 'Gracz',
+        photoURL: null,
+        uid: 'default-user',
+    });
 
     function logOut() {
-        return signOut(auth);
+        // Nie robimy nic, bo nie ma logowania
+        return Promise.resolve();
     }
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-            setUser(currentuser);
-        });
-
-        return () => {
-            unsubscribe();
-        };
-    }, [auth]);
 
     return <userAuthContext.Provider value={{ user, logOut }}>{children}</userAuthContext.Provider>;
 }

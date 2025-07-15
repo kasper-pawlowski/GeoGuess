@@ -3,7 +3,8 @@ import { useMediaQuery } from 'react-responsive';
 import { useUserAuth } from '../../contexts/AuthContext';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
-import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer, Points } from './SummaryItem.styles';
+import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer, Points, PlayerIcon, BotIcon } from './SummaryItem.styles';
+import { FaUser, FaRobot } from 'react-icons/fa';
 
 // SummaryItem pomiędzy rundami oddzielny layout dla mobile i desktop
 export const SummaryItem = ({ isUserSummary, data }) => {
@@ -22,6 +23,15 @@ export const SummaryItem = ({ isUserSummary, data }) => {
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
             <div>
+                {isUserSummary ? (
+                    <PlayerIcon>
+                        <FaUser />
+                    </PlayerIcon>
+                ) : (
+                    <BotIcon>
+                        <FaRobot />
+                    </BotIcon>
+                )}
                 <Name>{isUserSummary ? user.displayName : data?.name}</Name>
                 <Points>
                     {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
@@ -34,6 +44,15 @@ export const SummaryItem = ({ isUserSummary, data }) => {
         </Wrapper>
     ) : (
         <Wrapper isUserSummary={isUserSummary}>
+            {isUserSummary ? (
+                <PlayerIcon>
+                    <FaUser />
+                </PlayerIcon>
+            ) : (
+                <BotIcon>
+                    <FaRobot />
+                </BotIcon>
+            )}
             <Name>{isUserSummary ? user.displayName : data?.name}</Name>
             <Spacer />
             <RangeWrapper>
@@ -58,6 +77,15 @@ export const GameSummaryItem = ({ isUserSummary, data }) => {
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
             <div>
+                {isUserSummary ? (
+                    <PlayerIcon>
+                        <FaUser />
+                    </PlayerIcon>
+                ) : (
+                    <BotIcon>
+                        <FaRobot />
+                    </BotIcon>
+                )}
                 <Name>{isUserSummary ? user.displayName : data?.name}</Name>
                 <Points>{isUserSummary ? points : data?.points} pkt</Points>
             </div>
@@ -67,6 +95,15 @@ export const GameSummaryItem = ({ isUserSummary, data }) => {
         </Wrapper>
     ) : (
         <Wrapper isUserSummary={isUserSummary}>
+            {isUserSummary ? (
+                <PlayerIcon>
+                    <FaUser />
+                </PlayerIcon>
+            ) : (
+                <BotIcon>
+                    <FaRobot />
+                </BotIcon>
+            )}
             <Name>{isUserSummary ? user.displayName : data?.name}</Name>
             <RangeWrapper>
                 <GameRangeTrack points={isUserSummary ? points : data?.points} rounds={rounds} />

@@ -2,46 +2,62 @@ import styled from 'styled-components';
 import { MdError } from 'react-icons/md';
 
 export const Wrapper = styled.div`
-    background-color: #fdedee;
+    background: ${({ theme }) => theme.colors.error};
+    color: ${({ theme }) => theme.colors.surface};
     display: flex;
-    gap: 10px;
-    padding: 12px;
-    border-radius: 6px;
-    min-width: ${({ region }) => (region ? 'auto' : '300px')};
-    margin-top: 20px;
-    @media (max-width: 768px) {
-        width: 80%;
+    gap: ${({ theme }) => theme.spacing.md};
+    padding: ${({ theme }) => theme.spacing.lg};
+    border: 4px solid ${({ theme }) => theme.colors.border};
+    border-radius: 0;
+    min-width: ${({ region }) => (region ? 'auto' : '320px')};
+    margin-top: ${({ theme }) => theme.spacing.lg};
+    box-shadow: 6px 6px 0px ${({ theme }) => theme.colors.shadow};
+    transform: rotate(-1deg);
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+        width: 90%;
+        transform: rotate(0deg);
     }
 
     div {
         display: flex;
         flex-direction: column;
+        flex: 1;
     }
 
     p {
-        line-height: 2rem;
-        font-weight: 500;
+        line-height: 1.6;
+        font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+        font-size: ${({ theme }) => theme.typography.fontSize.md};
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: ${({ theme }) => theme.spacing.sm};
+
+        &:last-child {
+            margin-bottom: 0;
+        }
 
         &:nth-child(2) {
             position: relative;
-            margin-top: 10px;
+            margin-top: ${({ theme }) => theme.spacing.md};
 
             &::after {
                 content: '';
                 position: absolute;
                 left: 50%;
-                translate: -50% 0;
-                top: -5px;
+                transform: translateX(-50%);
+                top: -${({ theme }) => theme.spacing.sm};
                 width: 100%;
-                height: 1px;
-                background-color: #d6a9a9;
-                border-radius: 100vw;
+                height: 3px;
+                background: ${({ theme }) => theme.colors.surface};
+                border-radius: 0;
             }
         }
     }
 `;
 
 export const Icon = styled(MdError)`
-    color: #f04d62;
-    font-size: 2rem;
+    color: ${({ theme }) => theme.colors.surface};
+    font-size: 2.5rem;
+    flex-shrink: 0;
 `;
