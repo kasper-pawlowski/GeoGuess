@@ -22,7 +22,7 @@ export const SummaryItem = ({ isUserSummary, data }) => {
 
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
-            <div>
+            <div className="left-section">
                 {isUserSummary ? (
                     <PlayerIcon>
                         <FaUser />
@@ -34,33 +34,39 @@ export const SummaryItem = ({ isUserSummary, data }) => {
                 )}
                 <Name>{isUserSummary ? user.displayName : data?.name}</Name>
             </div>
-            <RangeWrapper>
+            <div className="center-section">
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : data?.distance} />
+            </div>
+            <div className="right-section">
                 <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : data?.distance} m</p>
                 <p>
                     {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
                 </p>
-            </RangeWrapper>
+            </div>
         </Wrapper>
     ) : (
         <Wrapper isUserSummary={isUserSummary}>
-            {isUserSummary ? (
-                <PlayerIcon>
-                    <FaUser />
-                </PlayerIcon>
-            ) : (
-                <BotIcon>
-                    <FaRobot />
-                </BotIcon>
-            )}
-            <Name>{isUserSummary ? user.displayName : data?.name}</Name>
-            <RangeWrapper>
+            <div className="left-section">
+                {isUserSummary ? (
+                    <PlayerIcon>
+                        <FaUser />
+                    </PlayerIcon>
+                ) : (
+                    <BotIcon>
+                        <FaRobot />
+                    </BotIcon>
+                )}
+                <Name>{isUserSummary ? user.displayName : data?.name}</Name>
+            </div>
+            <div className="center-section">
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : data?.distance} />
+            </div>
+            <div className="right-section">
                 <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : data?.distance} m</p>
                 <p>
                     {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
                 </p>
-            </RangeWrapper>
+            </div>
         </Wrapper>
     );
 };

@@ -165,7 +165,7 @@ const ModalBody = styled.div`
         font-weight: 700;
         margin: 20px 0 10px 0;
         color: ${({ theme }) => theme.colors.accent};
-        
+
         &:first-child {
             margin-top: 0;
         }

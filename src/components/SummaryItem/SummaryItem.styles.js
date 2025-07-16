@@ -13,11 +13,48 @@ export const Wrapper = styled.div`
     box-shadow: 4px 4px 0px ${({ theme }) => theme.colors.shadow};
     transition: all 0.2s ease;
     align-items: center;
+    justify-content: space-between;
     min-height: 60px;
+    width: 100%;
+    max-width: 100%;
 
     &:hover {
         transform: translateY(-2px);
         box-shadow: 6px 6px 0px ${({ theme }) => theme.colors.shadow};
+    }
+
+    .left-section {
+        display: flex;
+        align-items: center;
+        gap: ${({ theme }) => theme.spacing.sm};
+        flex: 0 0 200px;
+    }
+
+    .center-section {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        margin: 0 ${({ theme }) => theme.spacing.lg};
+    }
+
+    .right-section {
+        display: flex;
+        align-items: center;
+        gap: ${({ theme }) => theme.spacing.sm};
+        flex: 0 0 240px;
+        justify-content: flex-end;
+
+        p {
+            width: 120px;
+            display: flex;
+            justify-content: center;
+            font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
+            background: ${({ theme }) => theme.colors.warning};
+            color: ${({ theme }) => theme.colors.text};
+            padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+            border: 2px solid ${({ theme }) => theme.colors.border};
+            margin: 0;
+        }
     }
 
     @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
@@ -28,32 +65,36 @@ export const Wrapper = styled.div`
         align-items: stretch;
         min-height: 50px;
 
-        div:nth-child(1) {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: ${({ theme }) => theme.spacing.sm};
+        .left-section {
+            flex: none;
+            justify-content: flex-start;
+        }
 
-            @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-                font-size: ${({ theme }) => theme.typography.fontSize.sm};
+        .center-section {
+            flex: none;
+            margin: ${({ theme }) => theme.spacing.sm} 0;
+        }
+
+        .right-section {
+            flex: none;
+            justify-content: space-between;
+
+            p {
+                width: 100px;
+                padding: ${({ theme }) => theme.spacing.xs};
             }
         }
     }
 `;
 
 export const Name = styled.div`
-    width: 120px;
     font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
     text-transform: uppercase;
     letter-spacing: 0.5px;
     display: flex;
     align-items: center;
     gap: ${({ theme }) => theme.spacing.sm};
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-        width: auto;
-        flex: 1;
-    }
+    flex: 1;
 `;
 
 export const Spacer = styled.div`
@@ -66,40 +107,9 @@ export const Spacer = styled.div`
     }
 `;
 
-export const RangeWrapper = styled.div`
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.xl};
-
-    @media (min-width: ${({ theme }) => theme.breakpoints.tablet}) {
-        width: 420px;
-    }
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-        flex: 1;
-    }
-
-    p {
-        width: 70px;
-        display: flex;
-        justify-content: flex-end;
-        font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-        background: ${({ theme }) => theme.colors.warning};
-        color: ${({ theme }) => theme.colors.text};
-        padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-        border: 2px solid ${({ theme }) => theme.colors.border};
-
-        @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-            width: 60px;
-            padding: ${({ theme }) => theme.spacing.xs};
-        }
-    }
-`;
-
 export const RangeTrack = styled.div`
     height: 6px;
-    flex: 1;
+    width: 100%;
     background: ${({ theme }) => theme.colors.border};
     position: relative;
     border: 2px solid ${({ theme }) => theme.colors.border};
