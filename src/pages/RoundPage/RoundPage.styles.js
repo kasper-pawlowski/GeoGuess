@@ -52,7 +52,7 @@ export const RightContainer = styled.div`
     display: flex;
     height: 100%;
     flex-direction: column;
-    min-width: 380px;
+    min-width: 450px;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         flex-direction: column-reverse;

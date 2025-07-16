@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useUserAuth } from '../../contexts/AuthContext';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
-import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Spacer, Points, PlayerIcon, BotIcon } from './SummaryItem.styles';
+import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Points, PlayerIcon, BotIcon } from './SummaryItem.styles';
 import { FaUser, FaRobot } from 'react-icons/fa';
 
 // SummaryItem pomiędzy rundami oddzielny layout dla mobile i desktop
@@ -33,13 +33,13 @@ export const SummaryItem = ({ isUserSummary, data }) => {
                     </BotIcon>
                 )}
                 <Name>{isUserSummary ? user.displayName : data?.name}</Name>
-                <Points>
-                    {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
-                </Points>
             </div>
             <RangeWrapper>
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : data?.distance} />
                 <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : data?.distance} m</p>
+                <p>
+                    {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
+                </p>
             </RangeWrapper>
         </Wrapper>
     ) : (
@@ -54,15 +54,13 @@ export const SummaryItem = ({ isUserSummary, data }) => {
                 </BotIcon>
             )}
             <Name>{isUserSummary ? user.displayName : data?.name}</Name>
-            <Spacer />
             <RangeWrapper>
                 <RangeTrack distanceBetween={isUserSummary ? distanceBetween : data?.distance} />
                 <p>{isUserSummary ? (distanceBetween ? distanceBetween : '-') : data?.distance} m</p>
+                <p>
+                    {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
+                </p>
             </RangeWrapper>
-            <Spacer />
-            <Points>
-                {isUserSummary ? `${pointsHistory[currentRound]} + ${userPoints} pkt` : `${data?.pointsHistory[currentRound]} + ${aiPoints} pkt`}
-            </Points>
         </Wrapper>
     );
 };

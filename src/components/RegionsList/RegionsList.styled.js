@@ -5,10 +5,11 @@ export const Wrapper = styled.div`
     flex-direction: column;
     gap: ${({ theme }) => theme.spacing.md};
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         width: 100%;
+        max-width: 100%;
         gap: ${({ theme }) => theme.spacing.sm};
     }
 `;

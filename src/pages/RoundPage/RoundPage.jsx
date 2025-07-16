@@ -15,6 +15,7 @@ const RoundPage = ({ data, setView }) => {
     const { roundTime, selectedRegion } = useGameConfigCtx();
     const { aiData, points, setPoints, setPointsHistory, distanceBetween, setDistanceBetween, currentRound, setAiData } = useGameCtx();
     const [loading, isLoading] = useState(true);
+    const [imageLoaded, setImageLoaded] = useState(false);
     const [secondsLeft, setSecondsLeft] = useState(roundTime);
     const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
     const { user } = useUserAuth();
@@ -24,6 +25,16 @@ const RoundPage = ({ data, setView }) => {
             isLoading(false);
         }
     }, [data]);
+
+    // Resetowanie stanu obrazu przy nowej rundzie
+    useEffect(() => {
+        setImageLoaded(false);
+        setSecondsLeft(roundTime);
+    }, [currentRound, roundTime]);
+
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
 
     // gdy zmienna punktów uzytkownika się zmieni, dodanie wartosci do historii punktów
     useEffect(() => {
@@ -73,7 +84,7 @@ const RoundPage = ({ data, setView }) => {
         !loading && (
             <Wrapper>
                 <ImageWrapper>
-                    <Image src={isMobile ? data[currentRound]?.img_s : data[currentRound]?.img} />
+                    <Image src={isMobile ? data[currentRound]?.img_s : data[currentRound]?.img} onImageLoad={handleImageLoad} />
                 </ImageWrapper>
                 <RightContainer>
                     <Ranking>
@@ -94,7 +105,7 @@ const RoundPage = ({ data, setView }) => {
                             </RankingItem>
                         ))}
                     </Ranking>
-                    <Timer handleTimeIsUp={handleTimeIsUp} secondsLeft={secondsLeft} setSecondsLeft={setSecondsLeft} />
+                    <Timer handleTimeIsUp={handleTimeIsUp} secondsLeft={secondsLeft} setSecondsLeft={setSecondsLeft} isActive={imageLoaded} />
                     <Map coordinates={data[currentRound].coordinates} handleNextRound={handleNextRound} />
                 </RightContainer>
             </Wrapper>

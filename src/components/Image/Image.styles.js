@@ -24,19 +24,10 @@ export const ImageWrapper = styled.div`
 
 export const Img = styled.img`
     animation: ${animation} 0.3s ease-out;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border: 4px solid ${({ theme }) => theme.colors.border};
     border-radius: 0;
-    max-height: calc(100vh - 70px - ${({ theme }) => theme.spacing.xxl} * 2);
     box-shadow: 4px 4px 0px ${({ theme }) => theme.colors.shadow};
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
-        max-height: calc(100vh - 70px - ${({ theme }) => theme.spacing.xl} * 2);
-    }
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        max-height: calc(50vh - 70px - ${({ theme }) => theme.spacing.lg} * 2);
-    }
 `;

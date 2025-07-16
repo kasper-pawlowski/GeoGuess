@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
         color: ${({ theme }) => theme.colors.accent};
         text-transform: uppercase;
         letter-spacing: -0.03em;
-        text-shadow: 4px 4px 0px ${({ theme }) => theme.colors.shadow};
         text-align: center;
         margin: 0;
 

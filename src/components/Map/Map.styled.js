@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     border: 5px solid ${({ theme }) => theme.colors.border};
     border-radius: 0;
-    min-width: 380px;
-    min-height: 380px;
+    min-width: 450px;
+    min-height: 450px;
     box-shadow: 8px 8px 0px ${({ theme }) => theme.colors.shadow};
     position: relative;
     background: ${({ theme }) => theme.colors.surface};
@@ -22,13 +22,13 @@ export const Wrapper = styled.div`
     }
 
     @media (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
-        min-width: 320px;
-        min-height: 320px;
+        min-width: 380px;
+        min-height: 380px;
     }
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        min-width: 280px;
-        min-height: 280px;
+        min-width: 320px;
+        min-height: 320px;
     }
 
     .leaflet-container {

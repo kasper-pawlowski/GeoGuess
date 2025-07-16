@@ -6,12 +6,13 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     gap: ${({ theme }) => theme.spacing.xxl};
-    min-height: 100%;
+    padding: ${({ theme }) => theme.spacing.xxl};
+    min-height: 100vh;
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         flex-direction: column;
         gap: ${({ theme }) => theme.spacing.xl};
-        padding-bottom: ${({ theme }) => theme.spacing.xxl};
+        padding: ${({ theme }) => theme.spacing.lg};
     }
 `;
 
@@ -19,8 +20,10 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1;
+    justify-content: flex-start;
     width: 100%;
+    max-width: 500px;
+    min-height: 600px;
     gap: ${({ theme }) => theme.spacing.xl};
     background: ${({ theme }) => theme.colors.surface};
     padding: ${({ theme }) => theme.spacing.xxl};
@@ -48,12 +51,13 @@ export const Container = styled.div`
         letter-spacing: -0.02em;
         margin-bottom: ${({ theme }) => theme.spacing.lg};
         text-align: center;
-        text-shadow: 3px 3px 0px ${({ theme }) => theme.colors.accent};
     }
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
         padding: ${({ theme }) => theme.spacing.lg};
         gap: ${({ theme }) => theme.spacing.lg};
+        max-width: 100%;
+        min-height: auto;
 
         h1 {
             font-size: ${({ theme }) => theme.typography.fontSize.xl};
@@ -61,28 +65,9 @@ export const Container = styled.div`
     }
 `;
 
-export const Line = styled.div`
-    height: 200px;
-    width: 6px;
-    background: linear-gradient(
-        45deg,
-        ${({ theme }) => theme.colors.accent} 0%,
-        ${({ theme }) => theme.colors.warning} 50%,
-        ${({ theme }) => theme.colors.success} 100%
-    );
-    border: 3px solid ${({ theme }) => theme.colors.border};
-    box-shadow: 4px 4px 0px ${({ theme }) => theme.colors.shadow};
-    transform: rotate(5deg);
-
-    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        width: 60%;
-        height: 6px;
-        transform: rotate(0deg);
-    }
-`;
-
 export const SettingWrapper = styled.div`
-    min-width: 280px;
+    width: 100%;
+    max-width: 350px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,7 +93,8 @@ export const SettingWrapper = styled.div`
     }
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        min-width: 90%;
+        width: 100%;
+        max-width: 100%;
         padding: ${({ theme }) => theme.spacing.md};
 
         p {
@@ -157,7 +143,8 @@ export const Button = styled.button`
     transition: all 0.2s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    min-width: 200px;
+    width: 100%;
+    max-width: 350px;
 
     &:hover {
         transform: translateY(-3px);
@@ -171,7 +158,8 @@ export const Button = styled.button`
     }
 
     @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-        width: 90%;
+        width: 100%;
+        max-width: 100%;
         font-size: ${({ theme }) => theme.typography.fontSize.md};
         padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
     }

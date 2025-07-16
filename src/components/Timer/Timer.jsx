@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { StyledIcon, StyledSpan, Wrapper } from './Timer.styles';
 
-const Timer = ({ handleTimeIsUp, secondsLeft, setSecondsLeft }) => {
+const Timer = ({ handleTimeIsUp, secondsLeft, setSecondsLeft, isActive = true }) => {
     let intervalId = null;
 
     // obsługa timera
     useEffect(() => {
-        if (secondsLeft > 0) {
+        if (secondsLeft > 0 && isActive) {
             intervalId = setInterval(() => {
                 setSecondsLeft((seconds) => seconds - 1);
             }, 1000);
-        } else {
+        } else if (secondsLeft <= 0) {
             clearInterval(intervalId);
             handleTimeIsUp();
         }
         return () => {
             clearInterval(intervalId);
         };
-    }, [secondsLeft, handleTimeIsUp]);
+    }, [secondsLeft, handleTimeIsUp, isActive]);
 
     return (
         <Wrapper>

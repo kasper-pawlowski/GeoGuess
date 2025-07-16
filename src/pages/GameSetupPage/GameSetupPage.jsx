@@ -4,7 +4,7 @@ import RegionsList from '../../components/RegionsList/RegionsList.jsx';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext.jsx';
 import { useGameCtx } from '../../contexts/GameContext.jsx';
 import useGameConditions from '../../hooks/useGameConditions.jsx';
-import { Button, Container, Input, Line, SettingWrapper, Wrapper } from './GameSetupPage.styles.js';
+import { Button, Container, Input, SettingWrapper, Wrapper } from './GameSetupPage.styles.js';
 
 const GameSetupPage = () => {
     const { rounds, setRounds, roundTime, setRoundTime, resetGameConfigContext } = useGameConfigCtx();
@@ -27,7 +27,6 @@ const GameSetupPage = () => {
                     </Error>
                 )}
             </Container>
-            <Line />
             <Container>
                 <h1>Zmień ustawienia gry</h1>
                 <SettingWrapper>

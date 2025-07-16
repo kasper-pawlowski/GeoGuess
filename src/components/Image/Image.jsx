@@ -2,8 +2,15 @@ import { useState } from 'react';
 import Spinner from '../Spinner';
 import { ImageWrapper, Img } from './Image.styles';
 
-const Image = ({ src }) => {
+const Image = ({ src, onImageLoad }) => {
     const [loading, isLoading] = useState(true);
+
+    const handleImageLoad = () => {
+        isLoading(false);
+        if (onImageLoad) {
+            onImageLoad();
+        }
+    };
 
     return (
         <>
@@ -12,7 +19,7 @@ const Image = ({ src }) => {
                     <Spinner />
                 </ImageWrapper>
             )}
-            <Img src={src} alt="" onLoad={() => isLoading(false)} style={{ display: loading ? 'none' : 'block' }} />
+            <Img src={src} alt="" onLoad={handleImageLoad} style={{ display: loading ? 'none' : 'block' }} />
         </>
     );
 };
