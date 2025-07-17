@@ -1,32 +1,24 @@
 import { createContext, useContext, useState } from 'react';
+import { getRandomBotNames } from '../data/botNames';
 
 const gameContext = createContext();
+
+const createInitialAiData = () => {
+    const botNames = getRandomBotNames(3);
+    return botNames.map((name) => ({
+        name,
+        points: 0,
+        pointsHistory: [],
+        distance: null,
+    }));
+};
 
 const initialState = {
     currentRound: 0,
     distanceBetween: null,
     points: 0,
     pointsHistory: [],
-    aiData: [
-        {
-            name: 'Maciej',
-            points: 0,
-            pointsHistory: [],
-            distance: null,
-        },
-        {
-            name: 'Michał',
-            points: 0,
-            pointsHistory: [],
-            distance: null,
-        },
-        {
-            name: 'Agata',
-            points: 0,
-            pointsHistory: [],
-            distance: null,
-        },
-    ],
+    aiData: createInitialAiData(),
 };
 
 export function GameContextProvider({ children }) {
@@ -41,7 +33,7 @@ export function GameContextProvider({ children }) {
         setDistanceBetween(initialState.distanceBetween);
         setPoints(initialState.points);
         setPointsHistory(initialState.pointsHistory);
-        setAiData(initialState.aiData);
+        setAiData(createInitialAiData());
     };
 
     return (
@@ -58,7 +50,8 @@ export function GameContextProvider({ children }) {
                 pointsHistory,
                 setPointsHistory,
                 resetGameContext,
-            }}>
+            }}
+        >
             {children}
         </gameContext.Provider>
     );
