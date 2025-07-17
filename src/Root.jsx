@@ -222,10 +222,10 @@ const AppContent = () => {
                         </li>
                     </ul>
 
-                    <h3>Przeciwnicy AI</h3>
+                    <h3>Przeciwnicy</h3>
                     <p>
-                        Grasz przeciwko inteligentnym botom, które również próbują odgadnąć lokalizacje. Każdy bot ma różny poziom trudności i
-                        strategie gry. Twoje wyniki są porównywane z ich osiągnięciami po każdej rundzie.
+                        Rywalizujesz z botami, które także biorą udział w grze. Ich wyniki są generowane losowo i porównywane z Twoimi osiągnięciami
+                        po każdej rundzie.
                     </p>
 
                     <h3>Rozgrywka</h3>
