@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useUserAuth } from '../../contexts/AuthContext';
 import { useGameConfigCtx } from '../../contexts/GameConfigContext';
 import { useGameCtx } from '../../contexts/GameContext';
-import { Name, RangeTrack, RangeWrapper, Wrapper, GameRangeTrack, Points, PlayerIcon, BotIcon } from './SummaryItem.styles';
+import { Name, RangeTrack, Wrapper, GameRangeTrack, Points, PlayerIcon, BotIcon } from './SummaryItem.styles';
 import { FaUser, FaRobot } from 'react-icons/fa';
 
 // SummaryItem pomiędzy rundami oddzielny layout dla mobile i desktop
@@ -80,7 +80,7 @@ export const GameSummaryItem = ({ isUserSummary, data }) => {
 
     return isMobile ? (
         <Wrapper isUserSummary={isUserSummary}>
-            <div>
+            <div className="left-section">
                 {isUserSummary ? (
                     <PlayerIcon>
                         <FaUser />
@@ -91,28 +91,34 @@ export const GameSummaryItem = ({ isUserSummary, data }) => {
                     </BotIcon>
                 )}
                 <Name>{isUserSummary ? user.displayName : data?.name}</Name>
+            </div>
+            <div className="center-section">
+                <GameRangeTrack points={isUserSummary ? points : data?.points} rounds={rounds} />
+            </div>
+            <div className="right-section">
                 <Points>{isUserSummary ? points : data?.points} pkt</Points>
             </div>
-            <RangeWrapper>
-                <GameRangeTrack points={isUserSummary ? points : data?.points} rounds={rounds} />
-            </RangeWrapper>
         </Wrapper>
     ) : (
         <Wrapper isUserSummary={isUserSummary}>
-            {isUserSummary ? (
-                <PlayerIcon>
-                    <FaUser />
-                </PlayerIcon>
-            ) : (
-                <BotIcon>
-                    <FaRobot />
-                </BotIcon>
-            )}
-            <Name>{isUserSummary ? user.displayName : data?.name}</Name>
-            <RangeWrapper>
+            <div className="left-section">
+                {isUserSummary ? (
+                    <PlayerIcon>
+                        <FaUser />
+                    </PlayerIcon>
+                ) : (
+                    <BotIcon>
+                        <FaRobot />
+                    </BotIcon>
+                )}
+                <Name>{isUserSummary ? user.displayName : data?.name}</Name>
+            </div>
+            <div className="center-section">
                 <GameRangeTrack points={isUserSummary ? points : data?.points} rounds={rounds} />
-            </RangeWrapper>
-            <Points>{isUserSummary ? points : data?.points} pkt</Points>
+            </div>
+            <div className="right-section">
+                <Points>{isUserSummary ? points : data?.points} pkt</Points>
+            </div>
         </Wrapper>
     );
 };

@@ -34,7 +34,6 @@ export const Wrapper = styled.div`
         flex: 1;
         display: flex;
         align-items: center;
-        margin: 0 ${({ theme }) => theme.spacing.lg};
     }
 
     .right-section {
@@ -45,11 +44,10 @@ export const Wrapper = styled.div`
         justify-content: flex-end;
 
         p {
-            width: 120px;
             display: flex;
             justify-content: center;
             font-weight: ${({ theme }) => theme.typography.fontWeight.bold};
-            background: ${({ theme }) => theme.colors.warning};
+            background: ${({ theme }) => theme.colors.cream};
             color: ${({ theme }) => theme.colors.text};
             padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
             border: 2px solid ${({ theme }) => theme.colors.border};
@@ -121,7 +119,7 @@ export const RangeTrack = styled.div`
         width: ${({ distanceBetween }) => (distanceBetween ? 100 - (distanceBetween / 5000) * 100 : 0)}%;
         background: linear-gradient(
             90deg,
-            ${({ theme }) => theme.colors.success} 0%,
+            ${({ theme }) => theme.colors.lightGreen} 0%,
             ${({ theme }) => theme.colors.warning} 50%,
             ${({ theme }) => theme.colors.error} 100%
         );
@@ -139,7 +137,7 @@ export const GameRangeTrack = styled(RangeTrack)`
             90deg,
             ${({ theme }) => theme.colors.error} 0%,
             ${({ theme }) => theme.colors.warning} 50%,
-            ${({ theme }) => theme.colors.success} 100%
+            ${({ theme }) => theme.colors.lightGreen} 100%
         );
     }
 `;
@@ -147,8 +145,8 @@ export const GameRangeTrack = styled(RangeTrack)`
 export const Points = styled.p`
     display: flex;
     align-items: center;
-    margin-left: auto;
-    background: ${({ theme }) => theme.colors.success} !important;
+    justify-content: center;
+    background: ${({ theme }) => theme.colors.lightGreen} !important;
     color: ${({ theme }) => theme.colors.surface} !important;
     font-weight: ${({ theme }) => theme.typography.fontWeight.bold} !important;
     padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md} !important;
@@ -156,12 +154,18 @@ export const Points = styled.p`
     box-shadow: 2px 2px 0px ${({ theme }) => theme.colors.shadow};
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    margin: 0 !important;
+
+    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+        width: 100px !important;
+        padding: ${({ theme }) => theme.spacing.xs} !important;
+    }
 `;
 
 export const PlayerIcon = styled.div`
     width: 36px;
     height: 36px;
-    background: ${({ theme }) => theme.colors.success};
+    background: ${({ theme }) => theme.colors.lightGreen};
     border: 3px solid ${({ theme }) => theme.colors.border};
     display: flex;
     align-items: center;
@@ -180,12 +184,12 @@ export const PlayerIcon = styled.div`
 export const BotIcon = styled.div`
     width: 36px;
     height: 36px;
-    background: ${({ theme }) => theme.colors.warning};
+    background: ${({ theme }) => theme.colors.accent};
     border: 3px solid ${({ theme }) => theme.colors.border};
     display: flex;
     align-items: center;
     justify-content: center;
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.surface};
     font-size: 1.1rem;
     flex-shrink: 0;
 
