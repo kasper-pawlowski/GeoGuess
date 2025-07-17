@@ -203,8 +203,8 @@ const AppContent = () => {
                 <ModalBody>
                     <h3>Jak działa gra?</h3>
                     <p>
-                        Quiz Architektoniczny to gra polegająca na odgadywaniu lokalizacji sławnych budynków i zabytków architektonicznych na mapie
-                        świata. Twoim zadaniem jest wskazanie miejsca na mapie, gdzie znajduje się pokazany obiekt.
+                        GeoGuess to gra polegająca na odgadywaniu lokalizacji sławnych budynków i zabytków architektonicznych na mapie świata. Twoim
+                        zadaniem jest wskazanie miejsca na mapie, gdzie znajduje się pokazany obiekt.
                     </p>
 
                     <h3>Jak liczone są punkty?</h3>
