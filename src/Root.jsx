@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { UserAuthContextProvider } from './contexts/AuthContext';
 import GameSetupPage from './pages/GameSetupPage/GameSetupPage';
-import ProtectedRoute from './components/ProtectedRoute';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { theme } from './styles/theme';
 import { ThemeProvider } from 'styled-components';
@@ -215,22 +214,8 @@ const AppContent = () => {
             <ActionButton onClick={handleActionButtonClick}>{pathname === '/' ? <BiInfoCircle /> : <BiHome />}</ActionButton>
             <LayoutContent>
                 <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <ProtectedRoute>
-                                <GameSetupPage />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route
-                        path="/game"
-                        element={
-                            <ProtectedRoute>
-                                <GamePage />
-                            </ProtectedRoute>
-                        }
-                    />
+                    <Route path="/" element={<GameSetupPage />} />
+                    <Route path="/game" element={<GamePage />} />
                     <Route path="/404" element={<NotFound />} />
                     <Route path="*" element={<Navigate to="/404" replace />} />
                 </Routes>
