@@ -104,7 +104,6 @@ export const GlobalStyle = createGlobalStyle`
         }
     }
 
-    /* Neobrutalist utility classes */
     .neobrutalist-shadow {
         box-shadow: 6px 6px 0px ${({ theme }) => theme?.colors?.shadow || '#000000'};
     }

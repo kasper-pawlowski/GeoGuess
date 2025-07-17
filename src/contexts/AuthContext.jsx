@@ -2,8 +2,6 @@ import { createContext, useContext } from 'react';
 
 const userAuthContext = createContext();
 
-// context który zwraca obiekt danych usera
-
 export function UserAuthContextProvider({ children }) {
     const user = {
         displayName: 'Gracz',

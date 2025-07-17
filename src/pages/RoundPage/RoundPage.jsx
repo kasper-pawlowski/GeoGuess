@@ -26,7 +26,6 @@ const RoundPage = ({ data, setView }) => {
         }
     }, [data]);
 
-    // Resetowanie stanu obrazu przy nowej rundzie
     useEffect(() => {
         setImageLoaded(false);
         setSecondsLeft(roundTime);
@@ -36,12 +35,10 @@ const RoundPage = ({ data, setView }) => {
         setImageLoaded(true);
     };
 
-    // gdy zmienna punktów uzytkownika się zmieni, dodanie wartosci do historii punktów
     useEffect(() => {
         setPointsHistory((prevPoints) => [...prevPoints, points]);
     }, [points]);
 
-    // funkcja do obslugi nastepnej rundy
     const handleNextRound = () => {
         if (distanceBetween < 5000 || !distanceBetween === null) {
             setPoints((points) => points + (5000 - distanceBetween));
@@ -50,14 +47,12 @@ const RoundPage = ({ data, setView }) => {
         setView('roundSummary');
     };
 
-    // funkcja która obsluguje przypadek gdy minie czas
     const handleTimeIsUp = () => {
         updateAiData();
         setDistanceBetween(null);
         setView('roundSummary');
     };
 
-    // aktualizowanie danych 3 pozostałych "botów"
     const updateAiData = async () => {
         const newData = await aiData.map((e) => {
             const newDistance = Math.round(Math.random() * 4999 + 1);

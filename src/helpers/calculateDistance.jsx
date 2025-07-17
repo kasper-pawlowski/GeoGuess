@@ -9,5 +9,3 @@ export const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const d = R * c;
     return Number((d * 1000).toFixed(0));
 };
-
-// Formuła Haversine'a - oblicza odległosć pomiędzy koordynatami

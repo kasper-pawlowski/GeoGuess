@@ -12,7 +12,6 @@ const GameSummary = () => {
         navigate(`/`);
     };
 
-    // sortowanie na podstawie sumy punktów
     const sortedData = [
         {
             isUserSummary: true,

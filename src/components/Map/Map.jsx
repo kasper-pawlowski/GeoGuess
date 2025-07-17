@@ -9,11 +9,11 @@ import { useGameCtx } from '../../contexts/GameContext';
 
 const Map = ({ coordinates, handleNextRound }) => {
     const { setDistanceBetween } = useGameCtx();
-    const [selectedCoords, setSelectedCoords] = useState(null); // współrzędne miejsca w którym user kliknął
+    const [selectedCoords, setSelectedCoords] = useState(null);
     const [clicked, isClicked] = useState(false);
     let timeoutId = null;
 
-    const targetPosition = [coordinates?.lat, coordinates?.lng]; // współrzędne budynku
+    const targetPosition = [coordinates?.lat, coordinates?.lng];
 
     const UserMarker = () => {
         useMapEvents({
@@ -25,7 +25,7 @@ const Map = ({ coordinates, handleNextRound }) => {
         });
 
         return selectedCoords ? <Marker className="userMarker" position={selectedCoords} /> : null;
-    }; // ustawianie markeru w miejscu kliknecia przez event z mapy leaflet
+    };
 
     useEffect(() => {
         if (selectedCoords) {
@@ -40,7 +40,7 @@ const Map = ({ coordinates, handleNextRound }) => {
         iconAnchor: [12, 41],
         popupAnchor: [1, -34],
         shadowSize: [41, 41],
-    }); // pobieranie ikony markeru
+    });
 
     useEffect(() => {
         if (selectedCoords) {
@@ -51,7 +51,7 @@ const Map = ({ coordinates, handleNextRound }) => {
         return () => {
             clearTimeout(timeoutId);
         };
-    }, [selectedCoords]); // jesli kliknięto w mape to po sekundzie wykonuje sie funkcja która obsluguje następną runde
+    }, [selectedCoords]);
 
     const colorOptions = { color: theme.colors.accent };
 
@@ -64,7 +64,8 @@ const Map = ({ coordinates, handleNextRound }) => {
                     doubleClickZoom={false}
                     center={getApproximateCoords(targetPosition[0], targetPosition[1])}
                     zoom={12}
-                    scrollWheelZoom={false}>
+                    scrollWheelZoom={false}
+                >
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

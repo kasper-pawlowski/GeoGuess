@@ -15,7 +15,6 @@ const RoundSummary = ({ setView, dataLength }) => {
         }
     };
 
-    // sortowanie danych na podstawie odleglosci od celu
     const sortedData = [{ isUserSummary: true, distance: distanceBetween }, ...aiData.map((e) => ({ ...e, isUserSummary: false }))].sort((a, b) =>
         a.distance > b.distance ? 1 : -1
     );
